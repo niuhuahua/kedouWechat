@@ -12,17 +12,17 @@
 
 ```
 ### 效果图
-####登录
- 
- ![]('./imgView/login.png')
+ #### 登录
+
+ ![](./imgView/login.png)
  
  #### 个人主页
  
- ![]('./imgView/member.png')
+ ![](./imgView/member.png)
  
  #### 嵌入的webView
  
- ![]('./imgView/webView.png')
+ ![](./imgView/webView.png)
  
  ####记录列表页
- ![]('./imgView/list.png')
+ ![](./imgView/list.png)
