@@ -22,7 +22,7 @@
  
  #### 嵌入的webView
  
- ![](./imgView/webView.png)
+ ![](./imgView/webView.jpg)
  
  #### 记录列表页
  ![](./imgView/list.png)
