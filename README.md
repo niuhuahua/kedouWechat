@@ -1,6 +1,7 @@
 # kedouWechat
 > 蝌蚪物流的微信小程序 基于wepy框架
 ### 安装运行
+```
  1. git clone https://github.com/niuhuahua/kedouWechat.git
 
  2. 运行`npm install` 安装依赖 建议用淘宝镜像 cnpm
@@ -12,4 +13,16 @@
 ```
 ### 效果图
 ####登录
- ![]('../')
+ 
+ ![]('./imgView/login.png')
+ 
+ #### 个人主页
+ 
+ ![]('./imgView/member.png')
+ 
+ #### 嵌入的webView
+ 
+ ![]('./imgView/webView.png')
+ 
+ ####记录列表页
+ ![]('./imgView/list.png')
