@@ -1,0 +1,71 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.pwdReturn{
+    height: 1200rpx;
+    background-color: #fff;
+    .list_pwd{
+        margin: 0 auto;
+        @include wh( 666.9rpx,131rpx);
+        line-height: 131rpx;
+        // display: flex;
+        // align-items: center;
+        border-bottom: 1rpx solid #c2c2c2;
+    .input_pwd{
+        display:block;
+        float: left;
+        @include sc(28rpx,#919191);
+        // border:1rpx solid #323232;
+        padding-left: 20rpx;
+        padding-top: 20rpx;margin-right: 20rpx;
+        @include wh( 360rpx,100rpx);
+    }
+    .clen_icon{
+            display:block;
+            float: right;
+            margin-top: 60rpx;
+            @include wh(36rpx,36rpx);
+    }
+    .return_msg{
+         @include wh( 264rpx,75rpx);
+         border: 1rpx dotted #FFCE10;
+         padding: 16rpx 28rpx ;
+         @include sc(28rpx,#FFAF10);
+    }
+ }
+ .btn_next{
+      margin: 0 auto;
+       margin-top: 75rpx;
+       @include wh( 670rpx,100rpx);
+       background-color: #FFCE10 ;
+       line-height: 100rpx;text-align: center;
+       border-radius:8rpx; 
+       @include sc(36rpx,#555);
+ }
+}
+
+</style>
+<template>
+  <view class="pwdReturn">
+      <!-- <p>/wl.zrbao.net http://192.168.1.82/#/phone?phone=${user.user_mobile}</p> -->
+    <web-view src="http://wl.zrbao.net/#/phone?user_type=${user.user_type}"></web-view>
+  </view>
+</template>
+<script>
+import wepy from "wepy";
+import Tips from '../../util/Tips.js'
+// import htmlParser from '../../components/htmlParser'
+import userService from '../../api/wl/user.js'
+export default class WlPwdReturn extends wepy.page {
+    data = {
+        user: JSON.parse(wx.getStorageSync('user'))
+    }
+  onLoad(){
+     const user  =JSON.parse(wx.getStorageSync('user'));
+     console.log('====================================');
+     console.log(user);
+     console.log('====================================');
+  }
+}
+</script>
+
+

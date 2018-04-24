@@ -1,0 +1,5 @@
+
+  <view class="pwdReturn">
+      <!-- <p>/wl.zrbao.net http://192.168.1.82/#/phone?phone=${user.user_mobile}</p> -->
+    <web-view src="http://wl.zrbao.net/#/phone?user_type=${user.user_type}"/>
+  </view>

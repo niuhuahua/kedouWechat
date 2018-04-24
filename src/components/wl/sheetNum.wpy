@@ -1,0 +1,65 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.bottom{
+     position: fixed;
+     bottom: 50rpx;
+     left: 40rpx;
+     .dotpo{
+       position: relative;
+       .dot{
+         @include wh(52rpx,52rpx);
+         border-radius: 50rpx;background-color: #ffce10;
+         @include sc(28rpx,#555);
+         text-align: center;
+         line-height: 52rpx;
+         position: absolute;
+         top: -10rpx;
+         left: 100rpx;
+       }
+     }
+    .dan_icon{
+       @include wh(160rpx,160rpx);
+    }
+  }
+</style>
+<template>
+  <view class="bottom">
+       <view class="dotpo">
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_sheet@2x.png" class="dan_icon"></image>
+         <view class="dot" wx-if="{{numSheet}}!='0'">{{numSheet}}</view>
+       </view>
+     </view>
+</template>
+<script>
+import wepy from 'wepy'
+import panService from '../../api/wl/pan.js'
+import Tips from '../../util/Tips.js'
+export default class SheetNum extends wepy.component {
+  data={
+    numSheet:''
+  }
+  methods={
+
+  }
+  getInvenNum(){
+      let that = this;
+      let param = {inventory_sn:JSON.parse(wx.getStorageSync('inventoryMsg')).inventory_sn,is_first:' '+JSON.parse(wx.getStorageSync('isFrist')) }
+       panService.getInvenNum(param).then(res=>{
+     if(res.Head.code=="S0000"){
+        that.numSheet = res.Body[0].count;
+        that.$apply();
+        console.log("获取盘点数量==》",res)
+     }else{
+        Tips.error(res.Head.msg)
+     }
+   }).catch(err=>{
+      Tips.error(err.Head.msg)
+   })
+  }
+  onLoad(){
+    this.getInvenNum();
+  }
+}
+</script>
+
+

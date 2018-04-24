@@ -1,0 +1,55 @@
+<style lang="scss">
+@import '../style/mixin.scss';
+.product{
+     padding-left: 30rpx;
+    .left{float: left;}
+    .prod-img{
+        @include bCol( #f31212 );
+        @include wh(180rpx,180rpx);
+    }
+    .msg{display: block;width: 380rpx;;display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 1;
+                                overflow: hidden;}
+    .msg-name{@include sc(30rpx,#2d2d2d)}
+    .msg-classifg{@include sc(22rpx,#a1a1a1);padding-top: 18rpx}
+    .msg-price{ @include sc(40rpx,$orange);padding-top: 24rpx}
+    .prod-cart{
+        @include wh(60rpx,60rpx);
+    }
+    .pro-msg{padding-left: 30rpx;}
+    .prod-cart{margin-top: 110rpx}
+    .iteam-prod{margin-top:24rpx;height: 200rpx; border-bottom: 1rpx solid #ebebeb;}
+}
+</style>
+<template>
+    <view class="product">
+      <view class="iteam-prod">
+          <image class="left prod-img" />
+          <view class="left pro-msg">
+              <text class="msg msg-name">倒计时倒说的还是的技术的教授打发沙发沙发</text>
+              <text class="msg msg-classifg">倒计时倒计时大数据时代结束</text>
+              <text class="msg msg-price">￥12.00</text>
+          </view>
+          <image class="left prod-cart" src="../images/classify/icon_shopping-cart.png"/>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Prduct extends wepy.component{
+    props={
+
+    }
+    data={
+
+    }
+    events={
+
+    }
+    methods={
+        
+    }
+  }
+</script>

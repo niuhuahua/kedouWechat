@@ -1,0 +1,110 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.changeTyppe{
+    .wl_tpye{
+        height: 120rpx;
+        line-height: 120rpx;
+        margin-bottom: 1rpx;
+        padding-left: 40rpx;
+        padding-right: 40rpx;
+         background: #fff;
+        .icon_type{
+            display: block;
+            float: left;
+            padding-top: 30rpx;
+          @include wh(60rpx,60rpx);
+        }
+        .type_text{
+            display: inline-block;
+            padding-left: 32rpx;
+            @include sc(30rpx,#4d4d4d);
+        }
+        .icon_select{
+         display: block;
+         float: right;
+         margin-top: 40rpx;
+          @include wh(40rpx,40rpx);
+        }
+    }
+    .btn_next{
+      margin: 0 auto;
+       margin-top: 75rpx;
+       @include wh( 670rpx,100rpx);
+       background-color: #FFCE10 ;
+       line-height: 100rpx;text-align: center;
+       border-radius:8rpx; 
+       @include sc(36rpx,#555);
+ }
+}
+</style>
+<template>
+  <view class="changeTyppe">
+    <view class="wl_tpye" style="margin-top:20rpx;"  @tap="changP">
+      <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_pandian@2x.png" class="icon_type"></image>
+      <text class="type_text">盘点功能</text>
+      <image wx-if="{{!pandian}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_select"></image>
+      <image wx-if="{{pandian}}"  src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_select"></image>
+    </view>
+     <view class="wl_tpye" @tap="changW">
+      <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_wuliu@2x.png" class="icon_type"></image>
+      <text class="type_text">物流功能</text>
+      <image wx-if="{{!wuliu}}"  src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_select"></image>
+      <image wx-if="{{wuliu}}"  src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_select"></image>
+    </view>
+    <!-- <view class="btn_next" style="margin-top:768rpx;">
+       <text>确认</text>
+    </view> -->
+    </view>
+  </view>
+</template>
+<script>
+import wepy from "wepy";
+export default class ChangeType extends wepy.page {
+  data = {
+    haveLogin:false,
+    pandian:false,
+    wuliu:false
+  }
+  methods = {
+    changP(){
+      if(this.haveLogin){
+           this.pandian = !this.pandian;
+            this.$navigate('pMember')
+            wx.setStorageSync('panType', true)
+      }else{
+
+      }
+   
+    },
+    changW(){
+      if(this.haveLogin){
+         this.wuliu = !this.wuliu;
+        wx.setStorageSync('panType', false)
+        this.$navigate('pMember')
+      }else{
+
+      }
+    }
+  }
+  onLoad(){
+    let user = wx.getStorageSync('user');
+    if(user){
+      this.haveLogin = true;
+      this.$apply();
+      let panType = wx.getStorageSync('panType');
+      console.log(panType)
+      if(panType==true||panType==false){
+        this.$navigate('pMember')
+      }else{
+       console.log("还没选择")
+      }
+    }else{
+       this.haveLogin = false;
+       this.$navigate('login')
+       this.$apply();
+    }
+  }
+}
+</script>
+
+

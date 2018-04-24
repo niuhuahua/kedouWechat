@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.product {
+  padding-left: 30rpx; }
+  .product .left {
+    float: left; }
+  .product .prod-img {
+    background-color: #f31212;
+    width: 180rpx;
+    height: 180rpx; }
+  .product .msg {
+    display: block;
+    width: 380rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden; }
+  .product .msg-name {
+    font-size: 30rpx;
+    color: #2d2d2d; }
+  .product .msg-classifg {
+    font-size: 22rpx;
+    color: #a1a1a1;
+    padding-top: 18rpx; }
+  .product .msg-price {
+    font-size: 40rpx;
+    color: #ff7200;
+    padding-top: 24rpx; }
+  .product .prod-cart {
+    width: 60rpx;
+    height: 60rpx; }
+  .product .pro-msg {
+    padding-left: 30rpx; }
+  .product .prod-cart {
+    margin-top: 110rpx; }
+  .product .iteam-prod {
+    margin-top: 24rpx;
+    height: 200rpx;
+    border-bottom: 1rpx solid #ebebeb; }

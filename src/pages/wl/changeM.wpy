@@ -1,0 +1,131 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.nowStart{
+  padding-top: 10rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  .start_text{
+    display: inline;
+    @include sc(28rpx,#555);
+  }
+  .endPan{
+    display: block;
+    float: right;
+  }
+  .choiceTwo{
+    margin-top: 100rpx;
+    padding-bottom: 40rpx;
+    display: flex;
+    justify-content: space-around;
+    .one_c{
+       @include wh(160rpx,160rpx);
+       background-color: cadetblue;
+       @include sc(64rpx,#fff);
+       border-radius: 100rpx;
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+    }
+    .one_text{
+      margin-top: 18rpx;
+       @include sc(32rpx,#4d4d4d);
+    }
+    .two_c{
+      background-color: burlywood;
+    }
+  }
+}
+.end_po{
+    width: 540rpx;
+    border-radius: 10rpx;
+    margin: 0 auto;
+     background-color: #f0ca34ee;
+     @include sc(32rpx,#4d4d4d);
+     height: 80rpx;
+     line-height: 80rpx;text-align: center;
+     margin-top: 40rpx;
+    }
+
+</style>
+<template>
+  <view style="background:#fff;height:1200rpx;">
+     <view class="nowStart">
+       <view class="start_text">开始盘点</view>
+       <!-- <view class="start_text endPan">结束盘点</view> -->
+       <view class="choiceTwo" @tap="weiSao">
+         <view class="one_v">
+           <view  class="one_c">扫</view>
+           <view class="one_text">微信扫一扫</view>
+         </view>
+         <view @tap="openShu">
+            <view class="one_c two_c">输 </view>
+            <view class="one_text">输入商品编码</view>
+         </view>
+       </view>
+     </view>
+     <view class="end_po" wx-if="{{isFrist}}" @tap="endPan">结束盘点</view>
+     <SheetNum></SheetNum>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import panService from '../../api/wl/pan.js'
+import Tips from '../../util/Tips.js'
+import SheetNum from '../../components/wl/sheetNum'
+export default class changeM extends wepy.page {
+   config = {
+      navigationBarTitleText: '库存盘点'
+    };
+  data = {
+    isFrist:false,
+    invenMsg:''
+  }
+  components={
+    SheetNum:SheetNum
+  }
+  methods = {
+    openShu(){
+      this.$navigate('setMa')
+    },
+    endPan(){//结束盘点
+    let that = this;
+    let param = {  inventory_sn:that.invenMsg.inventory_sn,is_first:wx.getStorageSync('isFrist') }
+     panService.getInvenEnd(param).then(res=>{
+       if(res.Head.code=="S0000"){
+         wx.setStorageSync('isFrist',res.Body[0].is_first)
+         that.$navigate('pMember')
+       }else{
+         Tips.error(res.Head.msg)
+       }
+     }).catch(err=>{
+       Tips.error(err.Head.msg)
+     })
+    },
+    weiSao(){
+      wx.scanCode({
+        success: function(res){
+          console.log(res)
+        },
+        fail: function() {
+          console.log(fail)
+        }
+      })
+    }
+  }
+   onLoad() {
+     let that = this;
+     this.isFrist = wx.getStorageSync('isFrist');
+     let invenMsg = JSON.parse(wx.getStorageSync('inventoryMsg'));
+     this.invenMsg = invenMsg;
+     if(invenMsg){
+     if(invenMsg.status=="2"||invenMsg.status=="5"){
+        this.isFrist = true;
+       }
+     }
+     this.$apply();
+   }
+  
+}
+</script>
+
+

@@ -1,0 +1,235 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+ .wlme_top{
+        height: 324rpx;
+        text-align: center;
+        // line-height: 462rpx;
+        // justify-content: center;
+        // align-items: center;
+        .userIcon{
+            margin-top: 63rpx;
+            @include wh(136rpx,136rpx);
+        }
+        .wluser{
+            display: block;
+            margin-top: 29rpx;
+            @include sc(32rpx,#4d4d4d);
+        }
+}
+ .wl_me_list{
+        height: 120rpx;
+        background-color: #fff;
+        line-height: 120rpx;
+        padding-left: 40rpx;
+        padding-right: 40rpx;
+        margin-bottom: 1rpx;
+        .iconLeft{
+             @include wh(34.4rpx,36.3rpx);
+             margin-right: 46.7rpx;
+             float: left;
+             margin-top: 42rpx;
+        }
+        .list_text{
+             @include sc(30rpx,#4d4d4d);
+        }
+        .list_text_right{
+             display: inline-block;
+             padding-left: 423rpx;
+             @include sc(28rpx,#919191);
+        }
+        
+        .next{
+              float: right;
+              margin-top: 48rpx;
+             @include wh(25.4rpx,25.4rpx);
+        }
+         .peis{
+            color: #FFCE10;
+            padding-left: 420rpx;
+        }
+       
+    }
+</style>
+<template>
+  <view>
+     <view class="wlme_top">
+          <image src="{{user.avatar}}" class="userIcon"/>
+          <text class="wluser">{{user.user_nicename}}</text>
+     </view>
+     <!-- 盘点 -->
+       <view class="wl_me_list" @tap="toKucun" wx-if="{{panType}}">
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_1@2x.png" class="iconLeft"></image>
+         <text class="list_text">库存盘点</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+     </view>
+      <view class="wl_me_list" @tap="toAddpan" wx-if="{{panType}}">
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_2@2x.png" class="iconLeft"></image>
+         <text class="list_text">添加盘点商品</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+     </view>
+      <view class="wl_me_list" @tap="toPanList"  wx-if="{{panType}}">
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_3@2x.png" class="iconLeft"></image>
+         <text class="list_text">盘点记录</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+     </view>
+     <!-- 配送 -->
+        <view class="wl_me_list"  wx-if="{{!panType}}" @tap="peiIng">
+            <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_5.png" class="iconLeft"></image>
+            <text class="list_text">配送中</text>
+            <text class="peis" wx-if="{{wliuCount.count2 !='0'}}">{{wliuCount.count2}}</text>
+            <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+        </view>
+        <view class="wl_me_list" wx-if="{{!panType}}"  @tap="peiWait">
+            <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_6.png" class="iconLeft"></image>
+            <text class="list_text">待配送</text>
+            <text class="peis" wx-if="{{wliuCount.count1 !='0'}}">{{wliuCount.count1}}</text>
+            <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+        </view>
+        <view class="wl_me_list" wx-if="{{!panType}}" @tap="peiList">
+            <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_3@2x.png" class="iconLeft"></image>
+            <text class="list_text">配送记录</text>
+            <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+        </view>
+       <view class="wl_me_list" @tap="toMember">
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_4@2x.png" class="iconLeft"></image>
+         <text class="list_text">基本信息</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+     </view>
+     
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import panDianSrevice from '../../api/wl/pan.js'
+import Tips from '../../util/Tips.js'
+export default class PMember extends wepy.page {
+     config = {
+      navigationBarTitleText: '蝌蚪物流'
+    };
+   data = {
+        user:'',
+        isPandian:'',//判断是否拥有盘点单
+        panMsg:'' ,  //当拥有盘点单时的盘点信息
+        isFrist:false,
+        panType:true,
+        wliuCount:''
+    }
+   methods = {
+       toKucun(){
+            if(this.isPandian){//已经有盘点单
+             if(this.panMsg.status=="2"){
+                this.$navigate('changeM');
+             }else if(this.panMsg.status=="4"){//跳转到结算单页面
+                 this.$navigate('pJieSuan');
+             }else if(this.panMsg.status=="5"){
+                 this.$navigate('changeM');
+                 wx.setStorageSync('isAdd', "1")
+             }else{
+                 console.log("其他的盘点状态")
+             }
+           }else{//没有盘点单
+               this.$navigate('pkucun');
+           }
+       },
+       toAddpan(){
+           let that = this;
+          if(this.panMsg){
+            if(that.isFrist){
+                Tips.error("首次盘点不能添加") 
+            }else{
+                  that.$navigate('addPanProd')
+            }
+          }else{
+             that.$navigate('pkucun')
+          }
+       },
+       toPanList(){
+        this.$navigate('pRecord');
+       },
+       toMember(){
+        this.$navigate('member');
+       },
+       peiIng(){
+
+       },
+       peiWait(){
+         this.$navigate('peiList');
+       },
+       peiList(){
+           
+       }
+
+   }
+   //获取配送人员的配送单数量
+   getAllocationCount(){
+       let that = this;
+       panDianSrevice.getAllocationCount().then(res=>{
+           if(res.Head.code=="S0000"){
+             that.wliuCount = res.Body[0];
+             console.log(res.Body[0])
+           }else{
+            Tips.error(res.Head.msg)
+           }
+       }).catch(err=>{
+           Tips.error(err.Head.msg)
+       })
+   }
+
+   //判断盘点人员是否拥有盘点单
+   getPanDianCount(){
+       let that = this;
+       panDianSrevice.getInveCount().then(res=>{
+        if(res.Head.code==="S0000"){
+          if(res.Body[0]){
+            that.isPandian = true;
+            that.panMsg = res.Body[0];
+            wx.setStorageSync('inventoryMsg', JSON.stringify(res.Body[0]))
+              let param = {inventory_sn:that.panMsg.inventory_sn }
+              panDianSrevice.isFirstInven(param).then(ress=>{
+               if(ress.Head.code=="S0000"){
+                 if(ress.Body[0].is_first){
+                     that.isFrist = ress.Body[0].is_first
+                     wx.setStorageSync('isFrist',ress.Body[0].is_first)
+                 }else{
+                      wx.setStorageSync('isFrist',ress.Body[0].is_first)
+                      that.isFrist = ress.Body[0].is_first
+                 }
+                   that.$apply();
+               }else{
+                 Tips.error(ress.Head.msg)
+               }
+              }).catch(errs=>{
+                Tips.error(errs.Head.msg)
+              })
+            wx.hideLoading();
+          }else{
+              wx.hideLoading();
+              that.isPandian = false;
+              that.$apply();
+              return false;
+          }
+        }
+       }).catch(err=>{
+           console.log("盘点人员是否拥有盘点单获取失败=>",err)
+       })
+   }
+    onLoad(){
+       let panType =  wx.getStorageSync('panType')
+       this.panType = panType;
+       if(panType){
+        console.log("盘点人员")
+       }else{
+         this.getAllocationCount();
+       }
+       wx.setStorageSync('isAdd', "2") //是否为补盘
+       let user =  JSON.parse(wx.getStorageSync("user"));
+       this.user = user;
+       console.log("user==>",user)
+       this.getPanDianCount();
+       this.$apply();
+     
+    }
+}
+</script>
+
+

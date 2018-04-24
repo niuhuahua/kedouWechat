@@ -1,0 +1,89 @@
+@import "./../../components/wl/peiPro.wxss";
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.lookAll {
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid  #f3f3f3;
+  padding-left: 40rpx;
+  padding-right: 37rpx;
+  background: #fff; }
+  .lookAll .all_name {
+    font-size: 28rpx;
+    color: #555; }
+  .lookAll .all_num {
+    font-size: 28rpx;
+    color: #FFCE10; }
+  .lookAll .iconOpen {
+    float: right;
+    margin-top: 30rpx;
+    width: 36rpx;
+    height: 18rpx; }
+
+.all_prod_price {
+  height: 110rpx;
+  line-height: 110rpx;
+  padding-left: 40rpx;
+  background: #fff;
+  margin-bottom: 30rpx; }
+  .all_prod_price .priceName {
+    font-size: 28rpx;
+    color: #555; }
+  .all_prod_price .price {
+    padding-left: 10rpx;
+    font-size: 36rpx;
+    color: #FFCE10; }
+
+.topPei {
+  margin: 0 auto;
+  margin-top: 20rpx;
+  width: 606rpx;
+  height: 74rpx;
+  background: #fff;
+  border: 1rpx solid #E1E1E1;
+  line-height: 74rpx;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+  border-radius: 100rpx;
+  position: relative; }
+  .topPei .pei_tye {
+    font-size: 24rpx;
+    color: #919191; }
+  .topPei .pei_main {
+    padding-left: 180rpx;
+    font-size: 28rpx;
+    color: #555; }
+  .topPei .iconOpen {
+    float: right;
+    margin-top: 30rpx;
+    width: 36rpx;
+    height: 18rpx; }
+
+.showPosi {
+  position: absolute;
+  margin: 0 auto;
+  left: -.2%;
+  top: 80rpx;
+  width: 674rpx;
+  height: 304rpx;
+  background-color: #fff;
+  z-index: 1000;
+  text-align: center; }
+  .showPosi .posi_item {
+    width: 674rpx;
+    display: block;
+    border-bottom: 1rpx solid #f3f3f3; }
+
+.mask {
+  position: fixed;
+  z-index: 999;
+  background: #eeeded;
+  opacity: 0.5;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0; }

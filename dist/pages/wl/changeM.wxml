@@ -1,0 +1,26 @@
+
+  <view style="background:#fff;height:1200rpx;">
+     <view class="nowStart">
+       <view class="start_text">开始盘点</view>
+       <!-- <view class="start_text endPan">结束盘点</view> -->
+       <view class="choiceTwo" bindtap="weiSao">
+         <view class="one_v">
+           <view class="one_c">扫</view>
+           <view class="one_text">微信扫一扫</view>
+         </view>
+         <view bindtap="openShu">
+            <view class="one_c two_c">输 </view>
+            <view class="one_text">输入商品编码</view>
+         </view>
+       </view>
+     </view>
+     <view class="end_po" wx-if="{{isFrist}}" bindtap="endPan">结束盘点</view>
+     
+  <view class="bottom">
+       <view class="dotpo">
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_sheet@2x.png" class="dan_icon"/>
+         <view class="dot" wx-if="{{$SheetNum$numSheet}}!='0'">{{$SheetNum$numSheet}}</view>
+       </view>
+     </view>
+
+  </view>

@@ -1,0 +1,115 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.plist{
+  
+   border-top: 4rpx solid #ffce10;
+    background-color: #fff;
+    
+    .plist-top{
+        padding-left: 40rpx;
+        padding-right: 37rpx;
+        @include sc(24rpx,#919191);
+        margin-bottom: 32rpx;
+        border-bottom: 1rpx solid #f3f3f3;
+        .top_bottom{
+          display: block;
+          margin-top: 18rpx;
+          margin-bottom: 32rpx;
+        }
+        .top_right{
+           display: block;
+           float: right;
+           margin-top: -70rpx;
+        }
+      }
+      .plist-bottom{
+         height: 214rpx;
+         padding-top: 41rpx;
+         width: 750rpx;
+         padding-left: 40rpx;
+         padding-right: 37rpx;
+         border-bottom: 1rpx solid  #f3f3f3;
+         .pro_img{
+             @include wh(130rpx,130rpx);
+         }
+         .pro_introd{
+             display: inline-block;
+             padding-left: 23rpx;
+             width: 519rpx;
+             .introd_top{
+                  @include sc(32rpx,#4d4d4d);
+                  padding-bottom: 8rpx;
+             }
+             .intr_spice{
+                  display: block;
+                  @include sc(24rpx,#919191);
+             }
+             .price{
+                  display: inline-block;
+                  padding-top: 11rpx;
+                 @include sc(28rpx,#555555 );
+             }
+             .all_price{
+                 float: right;
+                 margin-top: 10rpx;
+                @include sc(30rpx,#4d4d4d );
+             }
+         }
+     }
+    
+ }
+</style>
+<template>
+  <view class="plist">
+     <view class="plist-top">
+         <text style="display: block;margin-top:20rpx;">{{peiPro.from_ware_name}}仓库 <text style="padding-left:20rpx;padding-right:20rpx">至</text>   {{peiPro.to_ware_name}}仓库 </text>
+          <text class="top_bottom">配送单号：{{peiPro.allocation_order_sn}}</text>
+          <text class="top_right">{{peiPro.add_time}}</text>
+      </view>
+       <view class="plist-bottom" wx-if="{{!showIS[indexPro]}}" >
+             <image  src="{{peiPro.goodsItems[0].image_thumb}}"  lazy-load="true" class="pro_img"></image>
+             <view class="pro_introd">
+                 <view class="introd_top">{{peiPro.goodsItems[0].goods_name}}</view>
+                 <view class="intr_spice"> {{peiPro.goodsItems[0].g_value}} {{peiPro.goodsItems[0].gg_value}}</view>
+                 <view class="price">￥{{peiPro.goodsItems[0].price_sell}} * {{peiPro.goodsItems[0].goods_count}}  </view>
+                 <view class="all_price">￥{{peiPro.goodsItems[0].price_sell * peiPro.goodsItems[0].goods_count}}</view>
+             </view>
+      </view>
+      <block wx-if="{{showIS[indexPro]}}">
+          <view class="plist-bottom"   wx:for="{{peiPro.goodsItems}}"  wx:key="index" >
+             <image  src="{{item.image_thumb}}"  lazy-load="true" class="pro_img"></image>
+             <view class="pro_introd">
+                 <view class="introd_top">{{item.goods_name}}</view>
+                 <view class="intr_spice"> {{item.g_value}} {{item.gg_value}}</view>
+                 <view class="price">￥{{item.price_sell}} * {{item.goods_count}}  </view>
+                 <view class="all_price">￥{{item.price_sell * item.goods_count}}</view>
+             </view>
+      </view> 
+      </block>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class peiPro extends wepy.component {
+    props={
+     peiPro:[],
+     showIS:[],
+     indexPro:[]
+    }
+    data={
+
+    }
+    methods={
+     showThis(orderId){
+        //   this.showOther = orderId;
+      },
+      closeShow(){
+           this.showOther = '';
+      }
+    }
+     
+  
+}
+</script>
+
+

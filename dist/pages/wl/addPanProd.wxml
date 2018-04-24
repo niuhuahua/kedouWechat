@@ -1,0 +1,7 @@
+
+ <!-- <view>http://wl.zrbao.net/#/inventory/class?username={{user.user_mobile}}
+   &user_type={{user.user_type}}
+   &deviceId={{user.last_deviceid}}
+   &token={{user.token}}
+   &inventory_sn={{inventoryMsg.inventory_sn}}</view> -->
+   <web-view src="http://wl.zrbao.net/#/inventory/class?username={{user.user_mobile}}&user_type={{user.user_type}}&deviceId={{user.last_deviceid}}&token={{user.token}}&inventory_sn={{inventoryMsg.inventory_sn}}&bin_ware_id={{inventoryMsg.ware_id}}"/>

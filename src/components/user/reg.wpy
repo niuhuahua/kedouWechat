@@ -1,0 +1,143 @@
+<style lang="scss" scoped>
+@import '../../style/mixin.scss';
+.groupInput{
+    margin-top: 110rpx;
+    input { 
+          border:1rpx solid #A1A1A1;
+          border-radius: 2rpx;
+          }
+    .left{float: left}
+    .right{float: right}
+    .protocolView{
+      margin-top: 30rpx;
+      padding-left: 45rpx;
+      display: flex;
+      align-items: center;
+      height:35rpx;
+      .icon-ok{
+        @include wh(36rpx,36rpx);
+      }
+      .proText{
+         padding-left: 20rpx;
+         @include sc(28rpx,#a0a0a0);
+      }
+      .orangText{
+         @include sc(28rpx,#ff9600);
+      }
+    }
+    .nextBtn{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        @include bCol(#ff9600);
+        @include wh(640rpx,90rpx);
+        @include sc(36rpx,#FEFEFE);
+        margin-top: 40rpx;
+    }
+    .toLoginView{
+      display: flex;
+      margin-top: 60rpx;
+      justify-content: center;
+      .haveSpan{
+         @include sc(32rpx,#666666);
+      }
+      .loginSpan{
+         @include sc(32rpx,#ff9600);
+      }
+    }
+   .proDialog{
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      @include wh(100%,100%);
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+      .dialog-main{
+          position: fixed;
+          z-index: 5000;
+          @include wh(600rpx,700rpx);
+          // width: 80%;
+          // max-width: 300px;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          background-color: #FFFFFF;
+          // text-align: center;
+          border-radius: 3px;
+          overflow: hidden;
+        // position: fixed;
+        // z-index: 200;
+        // top: 50%;
+        // left: 50%;
+        //  @include wh(330rpx,330rpx);
+        //  @include bCol(#fff);
+        .dialog-name{
+          border: 1rpx solid rgba(216, 212, 212, 0.815);
+          .Dname{
+            display: inline-block;
+            padding-left: 230rpx;
+            padding-top:14rpx;
+            padding-bottom: 6rpx;
+          }
+            .iconfont{
+              @include iconfont(45rpx);
+            }
+            .icon-close:before{
+              content: "\e626";
+            }
+        }
+      }
+   }
+    
+}
+</style>
+<template>
+  <view class="groupInput">
+   <comReg/>
+    <view class="protocolView">
+      <image src="../../images/user/selected@2x.png" class="icon-ok"></image>
+      <text class="proText">阅读并同意</text><text class="orangText" @tap="showDig">蝌蚪电商注册协议条款</text>
+    </view>
+    <button class="nextBtn">下一步</button>
+    <view class="toLoginView">
+      <text class="haveSpan">已有账号？</text>
+      <text class="loginSpan">请登录</text>
+    </view>
+    <view class="proDialog" wx:if="{{showDialog}}">
+      <view class="dialog-main">
+        <view class="dialog-name">
+           <text class="Dname">注册协议</text>
+           <view class="iconfont icon-close right" @tap="closeDig"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import comReg from '../user/comReg'
+export default class Reg extends wepy.component {
+  components={
+    comReg:comReg
+  }
+  data={
+    showDialog:false
+  }
+  props={}
+  methods={
+    showDig(){
+      this.showDialog = true;
+   },
+   closeDig(){
+      this.showDialog = false;
+   }
+  }
+  
+  events={}
+  
+}
+</script>
+

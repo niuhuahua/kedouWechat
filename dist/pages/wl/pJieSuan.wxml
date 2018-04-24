@@ -1,0 +1,52 @@
+
+  <view class="pjsView">
+    <scroll-view scroll-y="true" scroll-with-animation="true" style="max-height:{{maxHeight}}rpx;" bindscrolltoupper="onPullDownRefresh" bindscrolltolower="onReachBottom">
+      <view class="pInsen_sn"> 盘点结算单编号：{{mainData.inventory_sn}} </view>
+        <view class="pInsenMsg">
+          <view class="msg_top"> <text class="msg_text">商品信息</text> </view>
+        </view>
+          <view class="top"  wx:for="{{mainData.lists}}" wx:key="index">
+             <image src="{{item.image_thumb}}" class="pro_img"/>
+             <view class="pro_introd">
+                 <view class="introd_top">{{item.goods_name}} </view>
+                 <view class="intr_spice"> {{item.g_value}} 、{{item.gg_value}}  <text wx-if="{{item.goods_type=='1'}}">经销</text><text wx-if="{{item.goods_type=='2'}}">代销</text><text wx-if="{{item.goods_type=='3'}}">联销</text> </view>
+                 <view class="intr_bottom">
+                      <view class="price">￥{{item.price_sell}}  </view>
+                       <view class="addinput">
+                            <view class="buy-num">
+                                <view class="jian-btn" bindtap="jianValue" data-wpyjianvalue-a="{{item}}">-</view>
+                                <input type="number" value="{{item.storage_num}}" disabled/>
+                                <view class="jia-btn" bindtap="jiaValue" data-wpyjiavalue-a="{{item}}">+</view>
+                            </view>
+                       </view>
+                 </view>
+             </view>
+          </view> 
+     </scroll-view>
+    <view class="mask" wx-if="{{resonShow}}">
+     <view class="maskView">
+        <view class="mask_item">请选择修改原因</view>
+        <view  wx:for="{{resonList}}" wx:key="index" class="mask_item bor-top" bindtap="setReson" data-wpysetreson-a="{{item}}">{{item}}</view>
+        <view class="mask_item bor-top" bindtap="colseReson">取消</view>
+     </view>
+    </view>
+    <view wx-if="{{!isFrist}}">
+        <view wx-if="{{mainData.type=='3'}}" class="pInsB" bindtap="toCommendInsn">
+        提交({{mainData.settle_count}})
+        </view>
+    <view class="pInsenBottom" wx-if="{{mainData.type=='2'}}">
+      <view class="bottom-top">
+          <text class="top_before">代理总价：￥{{mainData.sell_money}}</text>
+          <text class="top_after">代理提成：￥{{mainData.diff_money}}</text>
+      </view>
+      <view class="bottom_bo">
+          <view class="bo_before">
+              实付金额：<text class="price_text">￥{{mainData.pay_money}}</text>
+          </view>
+          <view class="bo_after">
+              结算（{{mainData.settle_count}}）
+          </view>
+      </view>
+     </view>
+ </view>
+</view>

@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.wlme_top {
+  height: 324rpx;
+  text-align: center; }
+  .wlme_top .userIcon {
+    margin-top: 63rpx;
+    width: 136rpx;
+    height: 136rpx; }
+  .wlme_top .wluser {
+    display: block;
+    margin-top: 29rpx;
+    font-size: 32rpx;
+    color: #4d4d4d; }
+
+.wl_me_list {
+  height: 120rpx;
+  background-color: #fff;
+  line-height: 120rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  margin-bottom: 1rpx; }
+  .wl_me_list .iconLeft {
+    width: 34.4rpx;
+    height: 36.3rpx;
+    margin-right: 46.7rpx;
+    float: left;
+    margin-top: 42rpx; }
+  .wl_me_list .list_text {
+    font-size: 30rpx;
+    color: #4d4d4d; }
+  .wl_me_list .list_text_right {
+    display: inline-block;
+    padding-left: 423rpx;
+    font-size: 28rpx;
+    color: #919191; }
+  .wl_me_list .next {
+    float: right;
+    margin-top: 48rpx;
+    width: 25.4rpx;
+    height: 25.4rpx; }

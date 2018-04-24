@@ -1,0 +1,142 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.set_m._06d9ff4 {
+  height: 1200rpx;
+  background: #fff; }
+  .set_m .Vwidth._06d9ff4 {
+    width: 668rpx;
+    margin: 0 auto;
+    padding-top: 144rpx;
+    text-align: center; }
+    .set_m .Vwidth .icon_coding._06d9ff4 {
+      width: 100rpx;
+      height: 100rpx; }
+    .set_m .Vwidth .setcodeInput._06d9ff4 {
+      display: block;
+      padding-top: 71rpx;
+      padding-bottom: 35rpx;
+      font-size: 32rpx;
+      border-bottom: 2rpx solid #e1e1e1; }
+    .set_m .Vwidth .sure._06d9ff4 {
+      margin-top: 130rpx;
+      width: 668rpx;
+      height: 100rpx;
+      border-radius: 5rpx;
+      background-color: #ffce10;
+      text-align: center;
+      line-height: 100rpx;
+      font-size: 36rpx;
+      color: #555; }
+  .set_m .toshow._06d9ff4 {
+    position: fixed;
+    bottom: 0rpx;
+    left: 0rpx;
+    margin: 0 auto;
+    height: 560rpx;
+    width: 750rpx;
+    background-color: #fff; }
+    .set_m .toshow .top._06d9ff4 {
+      height: 204.5rpx;
+      padding-top: 41rpx;
+      margin-bottom: 13.5rpx;
+      width: 750rpx;
+      padding-left: 40rpx;
+      padding-right: 37rpx;
+      border-bottom: 1rpx solid  #e1e1e1; }
+      .set_m .toshow .top .pro_img._06d9ff4 {
+        width: 130rpx;
+        height: 130rpx; }
+      .set_m .toshow .top .pro_introd._06d9ff4 {
+        display: inline-block;
+        padding-left: 23rpx;
+        width: 519rpx; }
+        .set_m .toshow .top .pro_introd .introd_top._06d9ff4 {
+          font-size: 32rpx;
+          color: #4d4d4d;
+          padding-bottom: 8rpx; }
+        .set_m .toshow .top .pro_introd .intr_spice._06d9ff4 {
+          display: inline-block;
+          font-size: 24rpx;
+          color: #919191; }
+        .set_m .toshow .top .pro_introd .price._06d9ff4 {
+          display: block;
+          float: right;
+          font-size: 32rpx;
+          color: #FFAF10; }
+    .set_m .toshow .haveK._06d9ff4 {
+      font-size: 28rpx;
+      color: #919191; }
+    .set_m .toshow .num_v._06d9ff4 {
+      height: 104rpx;
+      display: flex;
+      border-bottom: 1rpx solid  #e1e1e1;
+      align-items: center;
+      padding-left: 40rpx;
+      padding-right: 37rpx; }
+      .set_m .toshow .num_v .buy-num._06d9ff4 {
+        width: 164rpx;
+        height: 48rpx;
+        line-height: 48rpx;
+        padding-left: 350rpx;
+        display: flex;
+        /*justify-content: space-between;*/
+        font-size: 24rpx;
+        text-align: center; }
+        .set_m .toshow .num_v .buy-num input._06d9ff4 {
+          width: 68rpx;
+          height: 48rpx;
+          min-height: 48rpx;
+          text-align: center;
+          font-size: 24rpx;
+          border: 1rpx solid #ccc; }
+        .set_m .toshow .num_v .buy-num .jian-btn._06d9ff4 {
+          width: 48rpx;
+          height: 100%;
+          border-left: 1rpx solid #ccc;
+          border-bottom: 1rpx solid #ccc;
+          border-top: 1rpx solid #ccc;
+          border-bottom-left-radius: 6rpx;
+          border-top-left-radius: 6rpx; }
+        .set_m .toshow .num_v .buy-num .jia-btn._06d9ff4 {
+          width: 48rpx;
+          height: 100%;
+          border-right: 1rpx solid #ccc;
+          border-bottom: 1rpx solid #ccc;
+          border-top: 1rpx solid #ccc;
+          border-bottom-right-radius: 6rpx;
+          border-top-right-radius: 6rpx; }
+    .set_m .toshow .chosic_type._06d9ff4 {
+      height: 117rpx;
+      line-height: 117rpx;
+      padding-left: 40rpx;
+      padding-right: 37rpx; }
+      .set_m .toshow .chosic_type .pa._06d9ff4 {
+        position: relative; }
+      .set_m .toshow .chosic_type .icon_type._06d9ff4 {
+        position: absolute;
+        top: 36rpx;
+        width: 40rpx;
+        height: 40rpx;
+        padding-right: 8rpx; }
+    .set_m .toshow .bottm_ma .left._06d9ff4 {
+      width: 50%;
+      height: 100rpx;
+      line-height: 80rpx;
+      display: inline-block;
+      text-align: center;
+      font-size: 32rpx;
+      color: #fff;
+      background: #555; }
+    .set_m .toshow .bottm_ma .right._06d9ff4 {
+      width: 50%;
+      height: 100rpx;
+      line-height: 80rpx;
+      text-align: center;
+      display: inline-block;
+      background-color: #FFCE10;
+      font-size: 32rpx;
+      color: #4d4d4d; }

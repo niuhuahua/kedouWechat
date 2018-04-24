@@ -1,0 +1,287 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.kucunp{
+//  height: 300rpx;
+ background-color: #fff;
+ padding-left: 40rpx;
+ padding-right: 42rpx;
+ padding-bottom: 10rpx;
+ .text{
+     padding-top: 33rpx;
+     @include sc(28rpx,#919191);
+ }
+ .diqu{
+     height: 111rpx;
+    //  background-color: blanchedalmond;
+     margin-bottom: 18rpx;
+     border-bottom: 1rpx solid #E1E1E1;
+     .left_d{
+         display: inline-block;
+         padding-top: 30rpx;
+         @include sc(30rpx,#4d4d4d); 
+     }
+     .right_d{
+        float: right;
+        padding-top: 30rpx;
+        .shensq{
+            display: inline-block;
+            padding-right: 26rpx;
+            @include sc(28rpx,#555555); 
+        }
+        .next{
+            display: inline-block;
+             @include wh(25.4rpx,25.4rpx);
+        }
+     }
+     
+ }
+}
+ .btn_next{
+      margin: 0 auto;
+       margin-top: 75rpx;
+       @include wh( 670rpx,100rpx);
+       background-color: #FFCE10 ;
+       line-height: 100rpx;text-align: center;
+       border-radius:8rpx; 
+       @include sc(36rpx,#555);
+ }
+</style>
+<template>
+<view>
+  <view class="kucunp">
+    <view class="text">
+        <text>请选择盘点仓库</text>
+    </view>
+    <!-- <view class="diqu">
+       <view class="left_d">地区</view>
+       <view class="right_d">
+           <view  class="shensq" @tap="openAddressPicker">{{province ? province.name : '省'}} - {{city ? city.name : '市' }} - {{area ? area.name : '区' }}</view>
+            <view class="shensq">
+              <areaPicker @areaArray.user="areaPickerArray"></areaPicker>
+            </view>
+           <image  @tap="openAddressPicker" src="../../images/assets/ios/btn_right@2x.png" class="next"></image>
+       </view>
+    </view> -->
+     <view class="diqu">
+       <view class="left_d">区级库</view>
+       <view class="right_d">
+            <view class="shensq" >
+               <picker @change="bindQuChange" value="{{index}}" range="{{arrayQu}}" range-key="{{'ware_name'}}">
+                      <view wx-if="{{quji}}" class="shensq">{{areaNameCode}}</view>
+                      <view  wx-if="{{!quji}}"  class="shensq">请选择</view>
+               </picker>
+            </view>
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+       </view>
+    </view>
+     <view class="diqu">
+       <view class="left_d">镇级库</view>
+       <view class="right_d">
+            <view class="shensq" >
+                <view  @tap="bindZhen" wx-if="{{!areaNameCode}}"  class="shensq">选填</view>
+               <picker wx-if="{{areaNameCode}}"  @change="bindZhenChange" value="{{indexZhen}}" range="{{arrayZhen}}" range-key="{{'ware_name'}}">
+                      <view wx-if="{{zhenji}}" class="shensq">{{zhenNameCode}}</view>
+                      <view  wx-if="{{!zhenji}}"  class="shensq">选填</view>
+               </picker>
+            </view>
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+       </view>
+    </view>
+    <view class="diqu">
+       <view class="left_d">村级库</view>
+       <view class="right_d">
+            <view class="shensq" >
+                 <view  @tap="bindCun" wx-if="{{!zhenNameCode}}"  class="shensq">选填</view>
+               <picker   wx-if="{{zhenNameCode}}" @change="bindCunChange" value="{{indexCun}}" range="{{arrayCun}}" range-key="{{'ware_name'}}">
+                      <view wx-if="{{cunji}}" class="shensq">{{cunNameCode}}</view>
+                      <view  wx-if="{{!cunji}}"  class="shensq">选填</view>
+               </picker>
+            </view>
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+       </view>
+    </view>
+     
+  </view>
+  <view class="btn_next" @tap="toPandian">
+       <text>开始盘点</text>
+  </view>
+</view>
+  
+</template>
+<script>
+import wepy from "wepy";
+import panDianSrevice from '../../api/wl/pan.js'
+import Tips from '../../util/Tips.js'
+export default class pKu extends wepy.page {
+     config = {
+      navigationBarTitleText: '库存盘点'
+    };
+    data = {
+    quji:false,
+    zhenji:false,
+    cunji:false,
+    cunCode: '',
+    zhenCode: '',
+    areaNameCode:'',
+    zhenNameCode:'',
+    cunNameCode:'',
+    areaCode: '',
+    arrayQu:[],
+    arrayZhen:[],
+    arrayCun:[],
+    index: 0,
+    indexZhen: 0,
+    indexCun: 0,
+    res:'',
+    level:''
+  }
+  methods={
+      bindZhen(){
+          Tips.error("请先选择区级库")
+      },
+      bindCun(){
+            Tips.error("请先选择镇级库")
+      },
+     bindQuChange (e) {
+                let that=this;
+                this.index = e.detail.value;
+                this.areaCode = this.arrayQu[e.detail.value].ware_id;
+                this.areaNameCode = this.arrayQu[e.detail.value].ware_name;
+                this.level = this.arrayQu[e.detail.value].level
+                this.quji = true;
+                 let parm  = {parent_id:this.areaCode}
+                panDianSrevice.getCityList(parm).then(res=>{
+                 if(res.Head.code=="S0000"){
+                   that.arrayZhen = res.Body;
+                   if(that.zhenji){
+                    that.zhenNameCode = res.Body[0].ware_name;
+                    that.zhenCode =res.Body[0].ware_id;
+                    that.level = res.Body[0].level;
+                   }
+                   that.$apply();
+                   if(that.cunji){
+                    let parm  = {parent_id:  that.zhenCode}
+                    panDianSrevice.getCityList(parm).then(res=>{
+                    if(res.Head.code=="S0000"){
+                       that.arrayCun = res.Body;
+                       if(that.cunji){
+                         that.cunNameCode =  that.arrayCun[0].ware_name;
+                         that.cunCode = that.arrayCun[0].ware_id;
+                         that.level = that.arrayCun[0].level;
+                        }
+                       that.$apply();
+                    }
+                    }).catch(err=>{
+                            console.log("获取村失败",err)
+                    })  
+                   }
+                 }
+                }).catch(err=>{
+                    console.log("获取镇失败",err)
+                })
+    },
+    bindZhenChange(e){
+        if(this.quji){
+          this.indexZhen = e.detail.value;
+          this.zhenCode = this.arrayZhen[e.detail.value].ware_id;
+          this.zhenNameCode = this.arrayZhen[e.detail.value].ware_name;
+          this.level = this.arrayZhen[e.detail.value].level
+          this.zhenji = true;
+           let parm  = {parent_id:this.zhenCode}
+                let that=this;
+                panDianSrevice.getCityList(parm).then(res=>{
+                 if(res.Head.code=="S0000"){
+                   that.arrayCun = res.Body;
+                   if(that.cunji){
+                     that.cunNameCode = res.Body[0].ware_name;
+                     that.cunCode = res.Body[0].ware_id;
+                     that.level =  res.Body[0].level;
+                   }
+                  that.$apply();
+                 }
+             }).catch(err=>{
+                    console.log("获取村失败",err)
+                })
+        }else{
+            Tips.error("请先选择区级库")
+        }
+          
+    },
+     bindCunChange(e){
+          if(this.zhenji){
+            this.indexCun = e.detail.value;
+            this.cunCode = this.arrayCun[e.detail.value].ware_id;
+            this.cunNameCode = this.arrayCun[e.detail.value].ware_name;
+            this.level = this.arrayCun[e.detail.value].level
+            this.cunji = true;
+          }else{
+             Tips.error("请先选择镇级库")
+          }
+         
+   },
+   toPandian(){
+       let ware_id = '';
+       let that = this;
+       if(this.areaCode){
+           ware_id = this.areaCode
+         if(this.zhenCode){
+            ware_id = this.zhenCode
+           if(this.cunCode){
+             ware_id = this.cunCode
+           }
+         }
+       }
+       let kuLoact = '';
+       if(that.areaNameCode){
+        kuLoact = `山东省${that.areaNameCode}`;
+         if(that.zhenNameCode){
+             kuLoact = `山东省${that.areaNameCode}${that.zhenNameCode}`;
+            if(that.cunNameCode){
+             kuLoact  = `山东省${that.areaNameCode}${that.zhenNameCode}${that.cunNameCode}`;
+            //   wx.setStorageSync('kuLoact', kuLoact)
+            }else{
+            //   wx.setStorageSync('kuLoact', kuLoact)
+            }
+         }else{
+            //  wx.setStorageSync('kuLoact', kuLoact)
+         }
+       }
+      let param  = { ware_id:ware_id,level:this.level }
+      panDianSrevice.getStorageLocation(param).then(res=>{
+          if(res.Head.code=="S0000"){
+             let paramS = {bin_ware_id:res.Body[0].bin_ware_id,bin_id:res.Body[0].bin_id,fullname:kuLoact }
+              panDianSrevice.getPanStart(paramS).then(resT=>{
+              if(resT.Head.code=="S0000"){
+                  wx.setStorageSync('inventoryMsg',JSON.stringify(resT.Body[0]))
+                  that.$navigate('changeM')
+              }else{
+                 Tips.error(resT.Head.msg)
+              }
+            }).catch(errT=>{
+              Tips.error(errT.Head.msg)
+            })
+          }else{
+           Tips.error(res.Head.msg)
+          }
+      }).catch(err=>{
+          Tips.error(err.Head.msg)
+      })
+   }
+  }
+
+  async onLoad(){
+    let that = this;
+    panDianSrevice.getAreaList().then(res=>{
+        if(res.Head.code=="S0000"){
+          that.arrayQu = res.Body;
+          that.$apply();
+           wx.hideLoading();
+        }
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+}
+</script>
+
+

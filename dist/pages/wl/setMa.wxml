@@ -1,0 +1,50 @@
+
+  <view class="set_m _06d9ff4">
+    <view class="Vwidth _06d9ff4">
+        <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_input_coding@2x.png" class="icon_coding _06d9ff4"/>
+        <input type="text" class="setcodeInput _06d9ff4" bindinput="changeCode" placeholder="请输入商品编码" value="{{inputCode}}"/>
+      <button class="sure _06d9ff4" bindtap="getCodeProduct">确认</button>
+    </view>
+    <view class="toshow _06d9ff4" wx-if="{{showModel}}">
+        <view class="top _06d9ff4">
+             <image src="{{codePro.image_thumb}}" class="pro_img _06d9ff4"/>
+             <view class="pro_introd _06d9ff4">
+                 <view class="introd_top _06d9ff4">{{codePro.goods_name}}</view>
+                 <view class="intr_spice _06d9ff4">{{codePro.g_name}}:{{codePro.g_value}} <text wx-if="{{codePro.gg_name}}" class="_06d9ff4">{{codePro.gg_name}}:{{codePro.gg_value}}</text> </view>
+                 <view class="price _06d9ff4">￥{{codePro.price_sell}} * {{codePro.storage_num}}</view>
+             </view>
+        </view>
+        <view class="num_v _06d9ff4">
+            <view class="haveK _06d9ff4">剩余库存</view>
+           <view class="_06d9ff4">
+             <view class="buy-num _06d9ff4">
+                <view class="jian-btn _06d9ff4" bindtap="jianNumber">-</view>
+                <input type="number" value="{{storage_num}}" disabled class="_06d9ff4"/>
+                <view class="jia-btn _06d9ff4" bindtap="addNumber">+</view>
+              </view>
+           </view>
+        </view>
+        <view class="chosic_type _06d9ff4">
+             <view class="haveK _06d9ff4" style="display:inline-block;">销售方式</view>
+             <view class="pa _06d9ff4" wx-if="{{saleType[0]=='1'}}" style="display:inline-block;padding-left:88rpx;">
+                 <image wx-if="{{checkType=='1'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_type _06d9ff4"/>
+                 <image bindtap="checkType" wx-if="{{checkType!='1'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_type _06d9ff4" data-wpychecktype-a="1"/>
+                 <text class="haveK _06d9ff4" style="padding-left:50rpx;">经销</text>
+             </view>
+             <view class="pa _06d9ff4" wx-if="{{saleType[1]=='2'}}" style="display:inline-block;padding-left:88rpx;">
+                  <image wx-if="{{checkType=='2'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_type _06d9ff4"/>
+                  <image bindtap="checkType" wx-if="{{checkType!='2'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_type _06d9ff4" data-wpychecktype-a="2"/>
+                 <text class="haveK _06d9ff4" style="padding-left:50rpx;">代销</text>
+             </view>
+             <view class="pa _06d9ff4" wx-if="{{saleType[2]=='3'}}" style="display:inline-block;padding-left:88rpx;">
+                <image wx-if="{{checkType=='3'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_type _06d9ff4"/>
+                 <image bindtap="checkType" wx-if="{{checkType=='3'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_type _06d9ff4" data-wpychecktype-a="3"/>
+                 <text class="haveK _06d9ff4" style="padding-left:50rpx;">联销</text>
+             </view>
+        </view>
+        <view class="bottm_ma _06d9ff4">
+            <view class="left _06d9ff4" bindtap="againSao">重新扫码</view>
+            <view class="right _06d9ff4" bindtap="setKuCun">确认库存</view>
+        </view>
+    </view>
+  </view>

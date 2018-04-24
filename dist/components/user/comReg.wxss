@@ -1,0 +1,64 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+input._f476546 {
+  border: 1rpx solid #A1A1A1;
+  border-radius: 2rpx; }
+
+.left._f476546 {
+  float: left; }
+
+.right._f476546 {
+  float: right; }
+
+.phonView._f476546 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /*返回图标*/ }
+  .phonView .phone._f476546 {
+    width: 575rpx;
+    height: 90rpx;
+    padding-left: 80rpx; }
+  .phonView .iconfont._f476546 {
+    font-family: "iconfont" !important;
+    font-size: 42rpx;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    color: #A1A1A1;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0 12rpx; }
+  .phonView .icon-phone._f476546:before {
+    content: "\e624"; }
+  .phonView .posi._f476546 {
+    position: absolute;
+    left: 60rpx; }
+
+.imgCodeView._f476546 {
+  display: flex;
+  margin-top: 30rpx;
+  justify-content: center; }
+  .imgCodeView .imgCodeInput._f476546 {
+    padding-left: 20rpx;
+    width: 400rpx;
+    height: 90rpx;
+    margin-right: 20rpx; }
+  .imgCodeView .imgCode._f476546 {
+    width: 220rpx;
+    height: 90rpx;
+    background-color: #2dd; }
+  .imgCodeView .getCodeText._f476546 {
+    display: inline-flex;
+    width: 220rpx;
+    height: 90rpx;
+    background-color: #e5e5e5;
+    align-items: center;
+    justify-content: center;
+    font-size: 28rpx;
+    color: #666; }

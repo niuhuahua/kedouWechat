@@ -1,0 +1,29 @@
+<style>
+
+</style>
+<template>
+ <!-- <view>http://wl.zrbao.net/#/inventory/class?username={{user.user_mobile}}
+   &user_type={{user.user_type}}
+   &deviceId={{user.last_deviceid}}
+   &token={{user.token}}
+   &inventory_sn={{inventoryMsg.inventory_sn}}</view> -->
+   <web-view src="http://wl.zrbao.net/#/inventory/class?username={{user.user_mobile}}&user_type={{user.user_type}}&deviceId={{user.last_deviceid}}&token={{user.token}}&inventory_sn={{inventoryMsg.inventory_sn}}&bin_ware_id={{inventoryMsg.ware_id}}"></web-view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class addPandian extends wepy.page{
+  data = {
+      user :'',
+      inventoryMsg:''
+  }
+  onLoad(){
+          const user  =JSON.parse(wx.getStorageSync('user'));
+          const inventoryMsg = JSON.parse(wx.getStorageSync('inventoryMsg'))
+          this.user = user;
+          this.inventoryMsg = inventoryMsg;
+          console.log(inventoryMsg)
+         
+  }
+}
+</script>
+

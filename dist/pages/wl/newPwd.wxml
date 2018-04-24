@@ -1,0 +1,21 @@
+
+  <view class="newPwd">
+     <view class="list_pwd">
+        <input  wx:if="{{pwdOnce}}" bindinput="changeNewpwd" value="{{newPwd}}" type="password" placeholder="输入原密码" class="input_pwd"/>
+        <image  wx:if="{{pwdOnce}}" bindtap="changePwdOnce" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_close@2x.png" class="clen_icon"/>
+        <input wx:if="{{!pwdOnce}}" bindinput="changeNewpwd" value="{{newPwd}}" type="text" placeholder="输入原密码" class="input_pwd"/>
+        <image wx:if="{{!pwdOnce}}" bindtap="changePwdOnce" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_open@2x.png" class="clen_icon"/>
+    </view>
+     <view class="list_pwd">
+        <input wx:if="{{pwdTwice}}" bindinput="changeAgainpwd" value="{{againPwd}}" type="password" placeholder="设置新密码" class="input_pwd"/>
+        <image wx:if="{{pwdTwice}}" bindtap="changePwdTwice" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_close@2x.png" class="clen_icon"/>
+        <input wx:if="{{!pwdTwice}}" bindinput="changeAgainpwd" value="{{againPwd}}" type="text" placeholder="设置新密码" class="input_pwd"/>
+        <image wx:if="{{!pwdTwice}}" bindtap="changePwdTwice" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_open@2x.png" class="clen_icon"/>
+    </view>
+    <view class="tip_msg">
+        <text wx-if="{{showDifference}}">请保持输入密码的一致性</text>
+    </view>
+    <view class="btn_next" bindtap="toChangePwd">
+       <text>确认</text>
+    </view>
+  </view>

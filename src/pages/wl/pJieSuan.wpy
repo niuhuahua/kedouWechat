@@ -1,0 +1,401 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.pjsView{
+    .pInsen_sn{
+      padding-left: 40rpx;
+      height: 82rpx;
+      @include sc(24rpx,#919191);
+      line-height: 82rpx;
+    }
+    .pInsenMsg{
+         .msg_top{
+             height: 88rpx;
+             line-height: 88rpx;
+             background-color: #fff;
+             @include sc(28rpx,#555555);
+            // border-bottom: 1rpx solid #f3f3f3;
+            .msg_text{
+                 padding-left: 40rpx;
+            }
+         } 
+    }
+}
+.top{
+         height: 204.5rpx;
+         padding-top: 41rpx;
+          padding-bottom: 41rpx;
+        //  margin-bottom: 13.5rpx;
+         width: 750rpx;
+         padding-left: 40rpx;
+         padding-right: 37rpx;
+         border-top: 1rpx solid  #f3f3f3;
+         background-color: #fff;
+         .pro_img{
+             @include wh(180rpx,180rpx);
+         }
+         .pro_introd{
+             display: inline-block;
+             padding-left: 23rpx;
+             width: 519rpx;
+             .introd_top{
+                  @include sc(32rpx,#4d4d4d);
+                //   padding-bottom: 8rpx;
+             }
+             .intr_spice{
+                  display: inline-block;
+                  @include sc(24rpx,#919191);
+             }
+             .intr_bottom{
+                 position: relative;
+                 display: block;
+                   .price{
+                     @include sc(32rpx,#FFAF10 );
+                 }
+                .addinput{
+                    display: inline;
+                }
+             }
+           
+         }
+     }
+       .buy-num {
+            width: 204rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            // padding-left: 350rpx;
+            position: absolute;
+            left: 290rpx;
+            top: 0;
+            display: flex;
+            // display: inline-block;
+            /*justify-content: space-between;*/
+            font-size: 24rpx;
+            text-align: center;
+            input {
+            width:108rpx;
+            height: 48rpx;
+            min-height: 48rpx;
+            text-align: center;
+            font-size: 24rpx;
+            border: 1rpx solid #ccc;
+            }
+             .jian-btn {
+            width: 48rpx;
+            height: 100%;
+            border-left: 1rpx solid #ccc;
+            border-bottom: 1rpx solid #ccc;
+            border-top: 1rpx solid #ccc;
+            border-bottom-left-radius: 3rpx;
+            border-top-left-radius: 3rpx;
+            } 
+             .jia-btn {
+            width: 48rpx;
+            height: 100%;
+            border-right: 1rpx solid #ccc;
+            border-bottom: 1rpx solid #ccc;
+            border-top: 1rpx solid #ccc;
+            border-bottom-right-radius: 3rpx;
+            border-top-right-radius: 3rpx;
+            }
+            }
+            .pInsB{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 100rpx;
+                line-height: 100rpx;
+                background-color:#FFAF10;
+                color: #4d4d4d;
+                font-size: 38rpx;
+                text-align: center;
+            }
+            .pInsenBottom{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 196.5rpx;
+                background: #fff;
+                .bottom-top{
+                    background-color: #fff;
+                    padding-left: 40rpx;
+                    padding-right: 40rpx;
+                    height: 95.5rpx;
+                    line-height: 95.5rpx;
+                    @include sc(24rpx,#919191);
+                    border-bottom:  2rpx solid  #f3f3f3;
+                    .top_after{
+                        display: block;
+                        float: right;
+                    }
+                }
+                .bottom_bo{
+                    position: relative;
+                    height: 98.5rpx;
+                    line-height: 98.5rpx;
+                    .bo_before{
+                         padding-left: 40rpx;
+                        @include sc(24rpx,#919191);
+                        .price_text{
+                             @include sc(36rpx,#555555)
+                        }
+                    }
+                    .bo_after{
+                       position: absolute;
+                       right: 0;
+                       top:0;
+                        @include wh(280rpx,100rpx);
+                        background-color:#ffce10;
+                        text-align: center;
+                        // line-height: 280rpx;
+                        @include sc(36rpx,#555555)
+                    }
+                }
+            }
+
+
+            .mask{
+                position: fixed;
+                // top: 50%;
+                // left: 1%;
+                bottom: 0;
+                left: 0;
+                top: 0;
+                background-color: rgba(204, 204, 204, 0.322);
+                height: 100%;
+                width: 100%;
+                z-index: 10000;
+                .maskView{
+                    background: #fff;
+                    border-radius: 20rpx;
+                    width: 80%;
+                    margin-left: 10%;
+                    position: fixed;
+                    bottom: 10%;
+                     .mask_item{
+                    height: 80rpx;
+                    line-height: 80rpx;
+                    text-align: center;
+                    margin: 0 auto;
+                    margin-bottom: 10rpx;
+                  }
+                  .bor-top{
+                       border-top:1rpx solid #ccc;
+                  }
+                }
+            }
+</style>
+<template>
+  <view class="pjsView">
+    <scroll-view scroll-y="true" scroll-with-animation="true"  style="max-height:{{maxHeight}}rpx;" bindscrolltoupper="onPullDownRefresh" bindscrolltolower="onReachBottom" >
+      <view class="pInsen_sn"> 盘点结算单编号：{{mainData.inventory_sn}} </view>
+        <view class="pInsenMsg">
+          <view class="msg_top"> <text class="msg_text">商品信息</text> </view>
+        </view>
+          <view class="top" wx:for = "{{mainData.lists}}" wx:key="index">
+             <image src="{{item.image_thumb}}" class="pro_img"></image>
+             <view class="pro_introd">
+                 <view class="introd_top">{{item.goods_name}} </view>
+                 <view class="intr_spice"> {{item.g_value}} 、{{item.gg_value}}  <text wx-if="{{item.goods_type=='1'}}">经销</text><text wx-if="{{item.goods_type=='2'}}">代销</text><text wx-if="{{item.goods_type=='3'}}">联销</text> </view>
+                 <view class="intr_bottom">
+                      <view class="price">￥{{item.price_sell}}  </view>
+                       <view class="addinput">
+                            <view class="buy-num">
+                                <view class="jian-btn" @tap="jianValue({{item}})">-</view>
+                                <input type="number"  value="{{item.storage_num}}" disabled/>
+                                <view class="jia-btn" @tap="jiaValue({{item}})">+</view>
+                            </view>
+                       </view>
+                 </view>
+             </view>
+          </view> 
+     </scroll-view>
+    <view class="mask" wx-if="{{resonShow}}">
+     <view class="maskView">
+        <view  class="mask_item">请选择修改原因</view>
+        <view wx:for="{{resonList}}" wx:key="index" class="mask_item bor-top" @tap="setReson({{item}})">{{item}}</view>
+        <view class="mask_item bor-top" @tap="colseReson">取消</view>
+     </view>
+    </view>
+    <view wx-if="{{!isFrist}}">
+        <view wx-if="{{mainData.type=='3'}}" class="pInsB" @tap="toCommendInsn">
+        提交({{mainData.settle_count}})
+        </view>
+    <view class="pInsenBottom" wx-if="{{mainData.type=='2'}}" >
+      <view class="bottom-top">
+          <text class="top_before">代理总价：￥{{mainData.sell_money}}</text>
+          <text class="top_after">代理提成：￥{{mainData.diff_money}}</text>
+      </view>
+      <view class="bottom_bo">
+          <view class="bo_before">
+              实付金额：<text class="price_text">￥{{mainData.pay_money}}</text>
+          </view>
+          <view class="bo_after">
+              结算（{{mainData.settle_count}}）
+          </view>
+      </view>
+     </view>
+ </view>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+import pagination from '../../mixins/pagination'
+import panService from '../../api/wl/pan.js'
+import Tips from '../../util/Tips.js'
+//该页面还没做下拉加载上拉更新 830 954
+export default class pJieSuan extends wepy.page {
+  data = {
+      winHeight:0,
+      maxHeight :0,
+      page: -100,
+      pageCount: -100,
+      mainData:[],storage_num:-100,
+      isFrist:wx.getStorageSync('isFrist'),
+      resonList:[],
+      reson:'',
+      resonShow:false,
+      numChangeItem:'',
+      isJian:false
+
+  };
+    components = {}
+    mixins = [pagination];
+    methods = {
+     jianValue(item){
+         if(this.isFrist){
+           return false;
+         }else{
+         this.isJian = true;
+         this.numChangeItem = item;
+         this.getResonNum();
+         this.resonShow = true;
+        }
+     },
+     jiaValue(item){
+      if(this.isFrist){
+           return false;
+         }else{
+         this.isJian = false;
+         this.numChangeItem = item;
+         this.getResonNum();
+         this.resonShow = true;
+        }
+     },
+     setReson(item){
+         let that = this;
+        this.reson = item;
+        this.resonShow = false;
+        let num  = parseInt(that.numChangeItem.storage_num);
+        if(this.isJian){
+            num = num-1;
+        }else{
+            num = num+1;
+        }
+        let param = {inventory_sn:that.mainData.inventory_sn,code_goods:that.numChangeItem.code_goods,num:" "+num,reason:item }
+        panService.getInvenUpdNum(param).then(res=>{
+         if(res.Head.code=="S0000"){
+          that.getInvenList(that.page);
+          that.$apply();
+         }else{
+              Tips.error(res.Head.msg)
+         }
+        }).catch(err=>{
+            Tips.error(err.Head.msg)
+        })
+     },
+     colseReson(){
+       this.resonShow = false;
+     },
+     toCommendInsn(){//提交结算单
+     let that = this;
+     let param = {inventory_sn:that.mainData.inventory_sn }
+        panService.getInvetSubmit().then(res=>{
+            if(res.Head.code=="S0000"){
+              that.$navigate('pRecord')
+            }else{
+              Tips.error(res.Head.msg)
+            }
+        }).catch(err=>{
+            Tips.error(err.head.msg)
+        })
+     }
+    }
+    getResonNum(){
+    let that = this;
+    panService.getCgNumReson().then(res=>{
+       if(res.Head.code=="S0000"){
+           that.resonList = res.Body[0].lists;
+           that.$apply();
+        console.log(res)
+       }else{
+           Tips.error(res.Head.msg)
+       }
+    }).catch(err=>{
+     Tips.error(err.Head.msg)
+    })
+    }
+
+   getInvenList(page){
+       let that = this;
+       let param = { inventory_sn:JSON.parse(wx.getStorageSync('inventoryMsg')).inventory_sn,is_first:" "+false,page:page}
+        panService.getInvenSetList(param).then(res=>{
+         if(res.Head.code=="S0000"){
+              that.pageCount = res.Body[0].count_page;
+              that.page =  res.Body[0].page;
+              that.$apply();
+             if(that.page==1){
+                that.mainData = res.Body[0];
+                that.$apply();
+             }else{
+                    that.mainData.lists.push(...res.Body[0].lists)
+                    that.$apply();
+             }
+                wx.getSystemInfo({
+                success: function(e) {
+                    let  winHeight =  e.windowHeight*2;//获取商品类型
+                    console.log(e.windowHeight)
+                    console.log(e.screenHeight)
+                    if(that.mainData.type=='2'){
+                        winHeight = winHeight-197;
+                        that.maxHeight = winHeight;
+                        // that.maxHeight = e.windowHeight;
+                    }else if(that.mainData.type=='3'){
+                        winHeight = winHeight-100;
+                        that.maxHeight = winHeight;
+                        // that.maxHeight =  e.windowHeight;
+                    }
+                    that.$apply();
+                    
+                }
+        })
+            
+            wx.hideLoading();
+         }else{
+             Tips.error(res.Head.msg)
+         }
+     }).catch(err=>{
+         Tips.error(err.Head.msg)
+     })
+   } 
+  onLoad(){
+    let is =  wx.getStorageSync('isFrist')
+    this.getInvenList(1);
+    let that = this;
+   
+    
+  }
+  onReachBottom(){
+      if(this.pageCount>this.page){
+          let page = this.page;page+=1;
+          this.getInvenList(page);
+      }else{
+        return false;
+      }
+     
+  }
+}
+</script>
+
+

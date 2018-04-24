@@ -1,0 +1,108 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+//    input { 
+//          border:none;
+//           }
+    .left{float: left}
+    .right{float: right}
+    .logoView{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 320rpx;
+        .logoImg{
+             @include wh(290rpx,120rpx);
+        }
+    }
+    .phonView{
+        margin: 0 auto;
+         @include wh(595rpx,90rpx);
+          border:1rpx solid #A1A1A1;
+          border-radius: 2rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .phone{
+           @include wh(400rpx,90rpx);
+         }
+         .iconfont{
+             @include iconfont(42rpx);
+         }
+         .icon-pwd:before{content: "\e60c"; }   /*密码图标*/
+         .icon-phone:before { content: "\e624"; }/*手机图标*/
+         .eye{@include wh(55rpx,38rpx);display: inline-flex;}
+         .posEye{position: absolute;right:20rpx;z-index: 100;}
+         .posi{position: absolute;left:15rpx;}
+    }
+    .remeber{
+          height: 90rpx;
+          display: flex;
+          align-items: center;
+        //   justify-content: center;
+          .check_icon{
+             @include wh(36rpx,36rpx);
+             margin-left: 85rpx;
+          }
+          .remb_text{
+              display: inline-block;
+              padding-left: 16rpx;
+              @include sc(28rpx,#666666);
+          }
+          .remb_forget{
+            //   为什么float 不好使
+              display: inline-block;
+              @include sc(28rpx,#ff9600);
+              margin-left: 320rpx;
+          }
+    }
+    .btn_login{
+        @include wh( 640rpx,90rpx);
+        @include bCol(#ff9600);
+        color: #fff;
+        border-radius: 4rpx;
+    }
+    .toreg{
+        @include sc(28rpx,#ff9600);
+        display:flex;
+        justify-content: center;
+        // height: 200rpx;
+        margin-top: 100rpx;
+        align-items: center;
+    }
+</style>
+<template>
+  <view class="login" style="background:#fff;height:1100rpx;overflow:hidden;">
+    <view class="logoView">
+        <image src="../../images/user/logo.png" class="logoImg"></image>
+    </view>
+    <view class="phonView">
+          <text class="iconfont icon-phone posi"></text>
+          <input class="phone" placeholder="手机号码"/>
+    </view>
+    <view class="phonView" style="margin-top:30rpx">
+          <text class="iconfont icon-pwd posi"></text>
+          <input class="phone" placeholder="密码" />
+          <image src="../../images/user/eye_close.png" class="eye posEye"></image>
+    </view>
+    <view class="remeber">
+       <image src="../../images/user/marquee@2x.png" class="check_icon"></image>
+       <text class="remb_text">记住我</text>
+       <text class="remb_forget">忘记密码？</text>
+    </view>
+    <view>
+        <button class="btn_login">登录</button>
+    </view>
+    <view class="toreg">
+        <text>免费注册</text>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class Login extends wepy.component {
+  
+}
+</script>
+
+

@@ -1,0 +1,60 @@
+
+<view>
+  <view class="kucunp">
+    <view class="text">
+        <text>请选择盘点仓库</text>
+    </view>
+    <!-- <view class="diqu">
+       <view class="left_d">地区</view>
+       <view class="right_d">
+           <view  class="shensq" bindtap="openAddressPicker">{{province ? province.name : '省'}} - {{city ? city.name : '市' }} - {{area ? area.name : '区' }}</view>
+            <view class="shensq">
+              <areaPicker v-on:areaArray="areaPickerArray"></areaPicker>
+            </view>
+           <image bindtap="openAddressPicker" src="../../images/assets/ios/btn_right@2x.png" class="next"></image>
+       </view>
+    </view> -->
+     <view class="diqu">
+       <view class="left_d">区级库</view>
+       <view class="right_d">
+            <view class="shensq">
+               <picker bindchange="bindQuChange" value="{{index}}" range="{{arrayQu}}" range-key="{{'ware_name'}}">
+                      <view wx-if="{{quji}}" class="shensq">{{areaNameCode}}</view>
+                      <view wx-if="{{!quji}}" class="shensq">请选择</view>
+               </picker>
+            </view>
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"/>
+       </view>
+    </view>
+     <view class="diqu">
+       <view class="left_d">镇级库</view>
+       <view class="right_d">
+            <view class="shensq">
+                <view bindtap="bindZhen" wx-if="{{!areaNameCode}}" class="shensq">选填</view>
+               <picker wx-if="{{areaNameCode}}" bindchange="bindZhenChange" value="{{indexZhen}}" range="{{arrayZhen}}" range-key="{{'ware_name'}}">
+                      <view wx-if="{{zhenji}}" class="shensq">{{zhenNameCode}}</view>
+                      <view wx-if="{{!zhenji}}" class="shensq">选填</view>
+               </picker>
+            </view>
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"/>
+       </view>
+    </view>
+    <view class="diqu">
+       <view class="left_d">村级库</view>
+       <view class="right_d">
+            <view class="shensq">
+                 <view bindtap="bindCun" wx-if="{{!zhenNameCode}}" class="shensq">选填</view>
+               <picker wx-if="{{zhenNameCode}}" bindchange="bindCunChange" value="{{indexCun}}" range="{{arrayCun}}" range-key="{{'ware_name'}}">
+                      <view wx-if="{{cunji}}" class="shensq">{{cunNameCode}}</view>
+                      <view wx-if="{{!cunji}}" class="shensq">选填</view>
+               </picker>
+            </view>
+           <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"/>
+       </view>
+    </view>
+     
+  </view>
+  <view class="btn_next" bindtap="toPandian">
+       <text>开始盘点</text>
+  </view>
+</view>

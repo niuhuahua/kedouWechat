@@ -1,0 +1,56 @@
+@import "./../../components/wl/produList.wxss";
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.plist {
+  border-top: 4rpx solid #ffce10;
+  background-color: #fff;
+  margin-bottom: 37rpx; }
+  .plist .plist-top {
+    padding-left: 40rpx;
+    padding-right: 37rpx;
+    font-size: 24rpx;
+    color: #919191; }
+    .plist .plist-top .top_bottom {
+      display: inline-block;
+      margin-top: 18rpx;
+      margin-bottom: 32rpx; }
+    .plist .plist-top .top_bottom_right {
+      float: right;
+      margin-top: 18rpx; }
+  .plist .plist-main {
+    height: 60rpx;
+    padding-left: 40rpx;
+    line-height: 60rpx;
+    border-top: 1rpx solid #f3f3f3;
+    border-bottom: 1rpx solid #f3f3f3;
+    font-size: 28rpx;
+    color: #ffaf10; }
+  .plist .ageaPan {
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #000;
+    background-color: #ffaf10; }
+  .plist .plist_price {
+    font-size: 28rpx;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    height: 110rpx;
+    line-height: 110rpx; }
+    .plist .plist_price .main_price {
+      font-size: 36rpx;
+      color: #ffaf10; }
+    .plist .plist_price .list_type {
+      display: block;
+      float: right;
+      font-size: 28rpx;
+      color: #ffaf10; }
+
+.noData {
+  text-align: center;
+  color: #919191; }

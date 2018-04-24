@@ -1,0 +1,71 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+ .plist-bottom{
+         height: 214rpx;
+         padding-top: 41rpx;
+         width: 750rpx;
+         padding-left: 40rpx;
+         padding-right: 37rpx;
+         border-bottom: 1rpx solid  #f3f3f3;
+         .pro_img{
+             @include wh(130rpx,130rpx);
+         }
+         .pro_introd{
+             display: inline-block;
+             padding-left: 23rpx;
+             width: 519rpx;
+             .introd_top{
+                  @include sc(32rpx,#4d4d4d);
+                  padding-bottom: 8rpx;
+             }
+             .intr_spice{
+                  display: block;
+                  @include sc(24rpx,#919191);
+             }
+             .price{
+                  display: inline-block;
+                  padding-top: 11rpx;
+                 @include sc(28rpx,#555555 );
+             }
+             .all_price{
+                 float: right;
+                @include sc(30rpx,#4d4d4d );
+             }
+         }
+     }
+</style>
+<template>
+   <view class="plist-bottom">
+             <image  src="{{goods.image_thumb}}" binderror="imgSrc({{goods.image_thumb}})"  lazy-load="true" class="pro_img"></image>
+               <!-- <image wx-if="{{imgSrc!=''}}" src="{{imgSrc}}" binderror="imgSrc({{goods.image_thumb}})"  lazy-load="true" class="pro_img"></image> -->
+             <view class="pro_introd">
+                 <view class="introd_top">{{goods.goods_name}}</view>
+                 <view class="intr_spice"> {{goods.g_value}} {{goods.gg_value}} <text wx-if="{{goods.goods_ab=='1'}}">经销</text> <text wx-if="{{goods.goods_ab=='2'}}">代销</text> <text wx-if="{{goods.goods_ab=='3'}}">联销</text>   </view>
+                 <view class="price">￥{{goods.price_sell}} * {{goods.nums}}  </view>
+                 <!-- <view class="all_price">￥{{goods.price_sell*goods.nums }}</view> -->
+             </view>
+    </view>
+</template>
+<script>
+import wepy  from "wepy";
+export default class produList extends wepy.component {
+  props= {
+      goods:{}
+  }
+  data= {
+      imgSrc:''
+  }
+  methods={
+      imgSrc(src,e){
+        // this.imgSrc = "http://oi7fjcrqu.bkt.clouddn.com/img_nopic.png";
+        // this.$apply();
+      }
+  }
+  onLoad(){
+      this.imgSrc = '';
+      this.$apply();
+  }
+}
+</script>
+
+

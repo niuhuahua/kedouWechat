@@ -1,0 +1,51 @@
+@import "./../../components/wl/sheetNum.wxss";
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.nowStart {
+  padding-top: 10rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx; }
+  .nowStart .start_text {
+    display: inline;
+    font-size: 28rpx;
+    color: #555; }
+  .nowStart .endPan {
+    display: block;
+    float: right; }
+  .nowStart .choiceTwo {
+    margin-top: 100rpx;
+    padding-bottom: 40rpx;
+    display: flex;
+    justify-content: space-around; }
+    .nowStart .choiceTwo .one_c {
+      width: 160rpx;
+      height: 160rpx;
+      background-color: cadetblue;
+      font-size: 64rpx;
+      color: #fff;
+      border-radius: 100rpx;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center; }
+    .nowStart .choiceTwo .one_text {
+      margin-top: 18rpx;
+      font-size: 32rpx;
+      color: #4d4d4d; }
+    .nowStart .choiceTwo .two_c {
+      background-color: burlywood; }
+
+.end_po {
+  width: 540rpx;
+  border-radius: 10rpx;
+  margin: 0 auto;
+  background-color: #f0ca34ee;
+  font-size: 32rpx;
+  color: #4d4d4d;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin-top: 40rpx; }

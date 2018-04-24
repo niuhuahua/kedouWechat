@@ -1,0 +1,305 @@
+<style lang="scss" scoped>
+@import '../../style/mixin.scss';
+.set_m{
+  height: 1200rpx;
+  background:#fff;
+//   background: rgba(85,85,85,0.50);
+  .Vwidth{
+    width: 668rpx;
+    margin: 0 auto;
+    padding-top: 144rpx;
+    text-align: center;
+   .icon_coding{
+    @include wh(100rpx,100rpx);
+    }
+    .setcodeInput{
+       display: block;
+       padding-top: 71rpx; 
+       padding-bottom: 35rpx;
+       font-size: 32rpx;
+    //    @include sc(32rpx,#fff);
+       border-bottom: 2rpx solid #e1e1e1;
+    }
+   .sure{
+       margin-top: 130rpx;
+        @include wh(668rpx,100rpx);
+        border-radius: 5rpx;background-color: #ffce10;
+        text-align: center;line-height: 100rpx;
+        @include sc(36rpx,#555);
+   }
+  }
+  .toshow{
+     position: fixed;
+     bottom:0rpx;
+     left: 0rpx;
+     margin: 0 auto;
+     height: 560rpx;
+     width: 750rpx;
+     background-color: #fff;
+    //  padding-left: 40rpx;
+     //padding-right: 37rpx;
+     .top{
+        //  background-color: blanchedalmond;
+         height: 204.5rpx;
+         padding-top: 41rpx;
+         margin-bottom: 13.5rpx;
+         width: 750rpx;
+         padding-left: 40rpx;
+         padding-right: 37rpx;
+         border-bottom: 1rpx solid  #e1e1e1;
+         .pro_img{
+             @include wh(130rpx,130rpx);
+         }
+         .pro_introd{
+             display: inline-block;
+             padding-left: 23rpx;
+             width: 519rpx;
+             .introd_top{
+                  @include sc(32rpx,#4d4d4d);
+                  padding-bottom: 8rpx;
+             }
+             .intr_spice{
+                  display: inline-block;
+                  @include sc(24rpx,#919191);
+             }
+             .price{
+                  display: block;
+                  float: right;
+                 @include sc(32rpx,#FFAF10 );
+             }
+         }
+     }
+      .haveK{
+              @include sc(28rpx,#919191 );
+         }
+     .num_v{
+         height: 104rpx;
+         display: flex;
+         border-bottom: 1rpx solid  #e1e1e1;
+         align-items: center;
+         padding-left: 40rpx;
+         padding-right: 37rpx;
+        //  justify-content: space-around;
+        
+         .buy-num {
+            width: 164rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            padding-left: 350rpx;
+            // position: absolute;
+            // right: 30rpx;
+            // bottom: 0;
+            display: flex;
+            /*justify-content: space-between;*/
+            font-size: 24rpx;
+            text-align: center;
+            input {
+            width:68rpx;
+            height: 48rpx;
+            min-height: 48rpx;
+            text-align: center;
+            font-size: 24rpx;
+            border: 1rpx solid #ccc;
+            }
+             .jian-btn {
+            width: 48rpx;
+            height: 100%;
+            border-left: 1rpx solid #ccc;
+            border-bottom: 1rpx solid #ccc;
+            border-top: 1rpx solid #ccc;
+            border-bottom-left-radius: 6rpx;
+            border-top-left-radius: 6rpx;
+            } 
+             .jia-btn {
+            width: 48rpx;
+            height: 100%;
+            border-right: 1rpx solid #ccc;
+            border-bottom: 1rpx solid #ccc;
+            border-top: 1rpx solid #ccc;
+            border-bottom-right-radius: 6rpx;
+            border-top-right-radius: 6rpx;
+            }
+            }
+     }
+     .chosic_type{
+         height: 117rpx;
+         line-height: 117rpx;
+         padding-left: 40rpx;
+         padding-right: 37rpx;
+         .pa{
+             position: relative;
+         }
+         .icon_type{
+            //  padding-top:10rpx;
+             position: absolute;top: 36rpx;
+              @include wh(40rpx,40rpx);
+              padding-right: 8rpx;
+         }
+     }
+     .bottm_ma{
+         .left{
+             width: 50%;
+              height: 100rpx;
+              line-height: 80rpx;
+             display: inline-block;
+             text-align: center;
+             @include sc(32rpx,#fff );
+             background: #555;
+         }
+         .right{
+             width: 50%;
+              height: 100rpx;
+              line-height: 80rpx;
+             text-align: center;
+             display: inline-block;
+             background-color: #FFCE10;
+             @include sc(32rpx,#4d4d4d );
+         }
+     }
+  }
+}
+</style>
+<template>
+  <view class="set_m">
+    <view class="Vwidth">
+        <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_input_coding@2x.png" class="icon_coding"></image>
+        <input type="text" class="setcodeInput" @input="changeCode" placeholder="请输入商品编码" value="{{inputCode}}">
+      <button class="sure" @tap="getCodeProduct">确认</button>
+    </view>
+    <view class="toshow" wx-if="{{showModel}}">
+        <view class="top">
+             <image src="{{codePro.image_thumb}}" class="pro_img"></image>
+             <view class="pro_introd">
+                 <view class="introd_top">{{codePro.goods_name}}</view>
+                 <view class="intr_spice">{{codePro.g_name}}:{{codePro.g_value}} <text wx-if="{{codePro.gg_name}}">{{codePro.gg_name}}:{{codePro.gg_value}}</text> </view>
+                 <view class="price">￥{{codePro.price_sell}} * {{codePro.storage_num}}</view>
+             </view>
+        </view>
+        <view class="num_v">
+            <view class="haveK">剩余库存</view>
+           <view>
+             <view class="buy-num">
+                <view class="jian-btn" @tap="jianNumber">-</view>
+                <input type="number" value="{{storage_num}}" disabled/>
+                <view class="jia-btn" @tap="addNumber">+</view>
+              </view>
+           </view>
+        </view>
+        <view class="chosic_type">
+             <view class="haveK" style="display:inline-block;">销售方式</view>
+             <view class="pa" wx-if="{{saleType[0]=='1'}}" style="display:inline-block;padding-left:88rpx;">
+                 <image wx-if="{{checkType=='1'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_type"></image>
+                 <image  @tap="checkType(1)"  wx-if="{{checkType!='1'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_type"></image>
+                 <text  class="haveK" style="padding-left:50rpx;">经销</text>
+             </view>
+             <view class="pa"  wx-if="{{saleType[1]=='2'}}" style="display:inline-block;padding-left:88rpx;">
+                  <image wx-if="{{checkType=='2'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_type"></image>
+                  <image @tap="checkType(2)" wx-if="{{checkType!='2'}}"  src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_type"></image>
+                 <text  class="haveK" style="padding-left:50rpx;">代销</text>
+             </view>
+             <view class="pa" wx-if="{{saleType[2]=='3'}}" style="display:inline-block;padding-left:88rpx;">
+                <image  wx-if="{{checkType=='3'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_type"></image>
+                 <image @tap="checkType(3)" wx-if="{{checkType=='3'}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_type"></image>
+                 <text  class="haveK" style="padding-left:50rpx;">联销</text>
+             </view>
+        </view>
+        <view class="bottm_ma">
+            <view class="left" @tap="againSao">重新扫码</view>
+            <view class="right" @tap="setKuCun">确认库存</view>
+        </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import panService from '../../api/wl/pan.js'
+import Tips from '../../util/Tips.js'
+export default class setMa extends wepy.page  {
+    data = {storage_num:0, insenMsg :'',inputCode:'',showModel:false,codePro:'',saleType:'',checkType:''}
+    methods = {
+        changeCode(e){
+          this.inputCode = e.detail.value
+        },
+        getCodeProduct(){
+            let that = this;
+            console.log(that.insenMsg)
+            let parma = {code_goods:that.inputCode,inventory_sn:that.insenMsg.inventory_sn,is_first:wx.getStorageSync('isFrist')}
+            panService.getScanGoods(parma).then(res=>{
+                wx.hideLoading()
+              if(res.Head.code=="S0000"){
+                that.showModel = true;
+                that.codePro = res.Body[0].goods_lists[0]; 
+                that.storage_num = res.Body[0].goods_lists[0].storage_num;
+                that.saleType = res.Body[0].sale_type;
+                that.$apply();
+                console.log(res.Body[0])
+              }else{
+                  that.showModel = false;
+                  Tips.error(res.Head.msg)
+              }
+            }).catch(err=>{
+
+            })
+        },
+        checkType(index){
+         console.log(index)
+         this.checkType = index;
+         this.$apply();
+        },
+        jianNumber(){
+            if( this.storage_num>0){
+                 this.storage_num -= 1;
+                 this.$apply();
+            }else{
+              this.storage_num = 0
+               this.$apply();
+            }
+       
+        },
+        addNumber(){
+         this.storage_num += 1;
+         this.$apply();
+        },
+        setKuCun(){//确认库存
+         let that = this;
+           if(!that.checkType){
+              Tips.error("请选择销售方式")
+              return false;
+           } 
+           let isBu = "";
+           if(wx.getStorageSync('isAdd')=="1"){
+               isBu = "2"
+           }else{
+                isBu = "1"
+           }
+           let param = {
+               code_goods:that.codePro.code_goods,inventory_sn:that.insenMsg.inventory_sn,is_first:wx.getStorageSync('isFrist'),
+               gstandard_id:that.codePro.gstandard_id,goods_id:that.codePro.goods_id,goods_ab:that.codePro.goods_ab,
+               goods_name:that.codePro.goods_name,price_sell:that.codePro.price_sell,ratio:that.codePro.ratio,price_purchase:that.codePro.price_purchase,
+               num:that.storage_num,image_thumb:that.codePro.image_thumb,g_name:that.codePro.g_name,g_value:that.codePro.g_value,gg_name:that.codePro.gg_name,
+               gg_value:that.codePro.gg_value,storage_num:that.codePro.storage_num,is_add:isBu
+           }
+          panService.setInvenProd(param).then(res=>{
+             if(res.Head.code=="S0000"){
+               wx.setStorageSync("inventorySn",res.Body[0].inventory_sn)
+               this.showModel = false;
+             }else{
+                 Tips.error(res.Head.msg)
+             }
+          }).catch(err=>{
+              Tips.error(err.Head.msg)
+          }) 
+        },
+        againSao(){//重新扫码
+         this.showModel = false;
+        }
+    }
+    onLoad() {
+    this.insenMsg =  JSON.parse(wx.getStorageSync('inventoryMsg'));
+    console.log(this.insenMsg)
+    this.$apply();
+   }
+}
+</script>
+
+

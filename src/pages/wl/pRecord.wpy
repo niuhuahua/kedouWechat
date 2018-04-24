@@ -1,0 +1,147 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.plist{
+   border-top: 4rpx solid #ffce10;
+    background-color: #fff;
+    margin-bottom: 37rpx;
+    .plist-top{
+        padding-left: 40rpx;
+        padding-right: 37rpx;
+        @include sc(24rpx,#919191);
+        .top_bottom{
+          display: inline-block;
+          margin-top: 18rpx;
+          margin-bottom: 32rpx;
+        }
+        .top_bottom_right{
+          float: right;
+           margin-top: 18rpx;
+        }
+    }
+    .plist-main{
+       height: 60rpx;
+       padding-left: 40rpx;
+       line-height: 60rpx;
+       border-top:  1rpx solid #f3f3f3;
+       border-bottom:  1rpx solid #f3f3f3;
+       @include sc(28rpx,#ffaf10);
+    }
+    .ageaPan{
+      height: 80rpx;
+      line-height: 80rpx;
+      text-align: center;
+       @include sc(28rpx,#000);
+       background-color: #ffaf10;
+    }
+   .plist_price{
+     font-size: 28rpx;
+     padding-left: 40rpx;
+     padding-right: 40rpx;
+     height: 110rpx;
+     line-height: 110rpx;
+     .main_price{
+         @include sc(36rpx,#ffaf10);
+     }
+     .list_type{
+       display: block;
+       float: right;
+        @include sc(28rpx,#ffaf10);
+     }
+   }
+   
+}
+.noData{
+     text-align: center;
+     color: #919191;
+   }
+</style>
+<template>
+  <view>
+   <scroll-view scroll-y  style="height:{{windowHeight}}" >
+      <view class="plist" wx:for="{{mainData}}" wx:key="index">
+      <view class="plist-top">
+         <text style="display: block;margin-top:20rpx;">{{item.inventory_fullname}}</text>
+         <text class="top_bottom"> {{item.end_time}} </text>
+         <text class="top_bottom_right">盘点结算单编号：{{item.inventory_sn}}</text>
+      </view>
+      <view class="plist-main">
+        商品缺失情况: <text wx-if="{{item.goods_lists.length==0}}">无</text><text wx-if="{{item.goods_lists.length!=0}}">有</text>
+      </view>
+       <repeat  for="{{item.goods_lists}}" key="index" index="index" item="item">
+        <ProucItem  wx-if="{{item.goods_lists.length>0}}"  :goods.sync="item"></ProucItem>
+       </repeat>
+      <view class="plist_price">
+         <text style="color:#555555">实付金额：</text>
+         <text class="main_price">￥{{item.actual_pay}}</text>
+         <text class="list_type"> 
+           <text wx-if="{{item.status=='0'}}">未处理</text> 
+           <text wx-if="{{item.status=='2'}}">未处理</text> 
+           <text wx-if="{{item.status=='4'}}">未处理</text> 
+           <text wx-if="{{item.status=='3'}}">已处理</text>
+           <text wx-if="{{item.status=='5'}}">已处理</text>
+           <text wx-if="{{item.status=='6'}}">已处理</text>
+          </text>
+      </view>
+      <view class="ageaPan" wx-if="{{item.inventory_add=='1'}}">补充盘点</view>
+    </view>
+   </scroll-view>
+   <view class="noData" wx-if="noData">没有更多数据了</view>
+  </view>
+</template>
+<script>
+import wepy from  'wepy'
+import ProucItem from '../../components/wl/produList'
+import Tips from '../../util/Tips.js'
+import panService from '../../api/wl/pan.js'
+export default class pRecord extends wepy.page {
+    data={
+      mainData:'',
+      countPage:-100,
+      page:-100,
+      windowHeight:0,
+      noData:false
+    }
+    config = {
+      navigationBarTitleText:'盘点记录'
+    }
+    components = {
+      ProucItem:ProucItem
+    }
+    methods = {
+      errorImg(src){
+        console.log("src==>",src)
+      }
+    }
+  onReachBottom(){
+    if(this.countPage==this.page){
+      this.noData = true;
+    }
+  }
+    onLoad(){
+      let that = this;
+        wx.getSystemInfo({
+          success: function(e) {
+            that.windowHeight = e.windowHeight;
+            that.$apply();
+            // console.log(e)
+          }
+        });
+      panService.getInvenLogs().then(res=>{
+       if(res.Head.code=="S0000"){
+         wx.hideLoading();
+         that.mainData = res.Body[0].lists;
+         that.countPage = res.Body[0].count_page;
+         that.page = res.Body[0].page;
+         that.$apply()
+       }else{
+          Tips.error(res.Head.msg)
+       }
+      }).catch(err=>{
+        Tips.error(err.Head.msg)
+      })
+    }
+  
+}
+</script>
+
+

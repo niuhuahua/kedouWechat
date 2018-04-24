@@ -1,0 +1,109 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+ .wlme_top{
+        height: 324rpx;
+        text-align: center;
+        // line-height: 462rpx;
+        // justify-content: center;
+        // align-items: center;
+        .userIcon{
+            margin-top: 63rpx;
+            @include wh(136rpx,136rpx);
+        }
+        .wluser{
+            display: block;
+            margin-top: 29rpx;
+            @include sc(32rpx,#4d4d4d);
+        }
+    }
+    .wl_me_list{
+        height: 120rpx;
+        background-color: #fff;
+        line-height: 120rpx;
+        padding-left: 40rpx;
+        padding-right: 40rpx;
+        margin-bottom: 1rpx;
+        .list_text{
+             @include sc(30rpx,#4d4d4d);
+        }
+        .list_text_right{
+             display: inline-block;
+             padding-left: 423rpx;
+             
+             @include sc(28rpx,#919191);
+        }
+        .next{
+              display: inline-block;
+              padding-left: 45rpx;
+             @include wh(25.4rpx,25.4rpx);
+        }
+    }
+   .loginOut{
+       height: 100rpx;
+       display: block;
+       line-height: 100rpx;
+       text-align: center;
+       background-color: #fff;
+       margin-top: 123rpx;
+       @include sc(28rpx,#919191);
+   }
+</style>
+<template>
+  <view class="wlmember">
+     <view class="wlme_top">
+          <image src="{{user.avatar}}" class="userIcon"/>
+          <text class="wluser">{{user.user_nicename}}</text>
+     </view>
+     <view class="wl_me_list" @tap="toChangePwd">
+         <text class="list_text">登录密码</text>
+         <text class="list_text_right">修改</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+     </view>
+      <view class="wl_me_list" @tap="toChangePhone">
+         <text class="list_text">手机号码</text>
+         <text class="list_text_right">修改</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"></image>
+     </view>
+     <view class="loginOut" @tap="loginOut">
+         <text>退出登录</text>
+     </view>
+  </view>
+</template>
+<script>
+import wepy from "wepy";
+import userService from '../../api/wl/user.js'
+export default class wlMember extends wepy.page {
+    data = {
+        user:''
+    }
+    methods = {
+        toChangePwd(){
+         this.$navigate('newPwd');
+        },
+        toChangePhone(){
+         this.$navigate('pwdReturn');
+        },
+        loginOut(){
+            let that = this;
+         userService.toLoginOut().then(res=>{
+          if(res.Head.code="S0000"){
+            wx.removeStorageSync('panType')
+            wx.removeStorageSync('user');
+            that.$navigate('/pages/wl/login')
+          }
+         }).catch(err=>{
+          console.log(err)
+         })
+        }
+    }
+    onLoad(){
+       let user =  JSON.parse(wx.getStorageSync("user"));
+       this.user = user;
+    //    this.$apply();
+    }
+  
+}
+</script>
+
+
+

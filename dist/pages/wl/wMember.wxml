@@ -1,0 +1,13 @@
+
+  <view>
+     <view class="wlme_top">
+          <image src="{{user.avatar}}" class="userIcon"/>
+          <text class="wluser">{{user.user_nicename}}</text>
+     </view>
+      
+       <view class="wl_me_list" bindtap="toMember">
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_personal_4@2x.png" class="iconLeft"/>
+         <text class="list_text">基本信息</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"/>
+     </view>
+  </view>

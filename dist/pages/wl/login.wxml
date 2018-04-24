@@ -1,0 +1,28 @@
+
+  <view class="wlLogin">
+     <view class="logoDiv">
+          <image class="logo" src="http://oi7fjcrqu.bkt.clouddn.com/logo.png"/>
+     </view>
+     <view class="content">
+          <view class="userInput">
+              <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_user@2x.png" class="iconUser"/>
+              <input type="text" bindinput="changePhone" class="inputUser" value="{{user_name}}" placeholder="请输入手机号码"/>
+          </view>
+          <view class="userInput" style="margin-top:81rpx;">
+              <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_password@2x.png" class="iconUser"/>
+              <input wx-if="{{pwdClose}}" bindinput="changePwd" type="password" class="inputUser" value="{{user_pass}}" placeholder="请输入密码"/>
+              <image wx-if="{{pwdClose}}" bindtap="pwdClose" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_close@2x.png" class="iconEye"/>
+              <input wx-if="{{!pwdClose}}" bindinput="changePwd" type="text" class="inputUser" value="{{user_pass}}" placeholder="请输入密码"/>
+              <image wx-if="{{!pwdClose}}" bindtap="pwdClose" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_open@2x.png" class="iconEye"/>
+          </view>
+          <view>
+              <button class="toLogin" bindtap="toLogin">登录</button>
+              <view class="login_boottom">
+                  <image wx-if="{{remeMe}}" bindtap="changeReMe" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="from_select_icon"/>
+                  <image wx-if="{{!remeMe}}" bindtap="changeReMe" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="from_select_icon"/>
+                 <text class="remberText text_login">记住我</text>
+                 <text class="forgetText text_login">忘记密码?</text>
+              </view>
+          </view>
+    </view>
+  </view>

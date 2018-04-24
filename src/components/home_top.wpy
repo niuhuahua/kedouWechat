@@ -1,0 +1,200 @@
+<template>
+  <!--index.wxml-->
+  <view>
+   <view class="tabViewimg">
+    <view class="swiper-tab">
+        <view wx:for="{{tabList}}" wx:key="index" class="swiper-tab-list {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" bindtap="swichNav">
+          {{item.name? item.name:item}}
+          <!-- <view class=" {{item.dotNum>=100?'dotbig':'dot'}}" wx:if="{{item.dotNum>0}}">{{item.dotNum}}</view> -->
+        </view>
+     </view>
+   <view class="right_shai">
+      <image wx-if="{{showSort}}" src="../images/classify/screen.png" class="shaixuan" @tap="showSrotF"></image>
+      <image wx-if="{{!showSort}}" src="../images/classify/screen_selected.png" class="shaixuan" @tap="showSrotF"></image>
+   </view>
+  </view>
+  <view class="shai_classifi" wx-if="{{!showSort}}">
+     <view wx:for="{{SortList}}"  wx:key="index" class="classifi_item {{ activeIndex == index ? 'activeSort' : '' }}" data-active="{{index}}"  bindtap="changeActive">{{item.name? item.name:item}}</view>
+  </view>
+  <view class="mask" wx-if="{{!showSort}}"></view>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class Filter extends wepy.component {
+  props = {
+    currentTab: {
+      default: 0
+    },
+    tabList: {
+      type: Object
+    },
+    showSort:{
+       default:true
+     },
+     SortList:{
+       default : []
+     },
+      activeIndex:{
+         default: 0
+      }
+  }
+  data={
+    sortData:"sortData"
+  }
+
+  methods = {
+    /**
+     * 点击tab切换
+     */
+    swichNav(e) {
+      let that = this;
+      if (this.data.currentTab == e.target.dataset.current) {
+        return false;
+      } else {
+        that.currentTab = e.target.dataset.current;
+        that.$apply();
+        console.log("that===>",that.currentTab)
+      }
+      this.$emit("currentTab", that.currentTab)
+    },
+    /**
+     * 头部红点标识
+     * @param  {[type]} dotList [description]
+     * @return {[type]}         [description]
+     */
+    changeList(dotList) {
+      this.tabList = dotList;
+    },
+    showSrotF(){
+      let that = this;
+      that.showSort = !that.showSort;
+      console.log("showSort===>",this.showSort)
+      console.log("sortData===>",this.sortData)
+      console.log("执行了")
+    },
+    // 点击选中
+    changeActive(e){
+        let that = this;
+      if (this.data.activeIndex == e.target.dataset.active) {
+        return false;
+      } else {
+        that.activeIndex = e.target.dataset.active;
+        that.showSort = !that.showSort;
+        that.$apply();
+        console.log("that===>",that.activeIndex)
+      }
+    }
+  }
+
+
+  onLoad() {
+    let that = this;
+    console.log("这是加载了组件")
+
+  }
+  watch = {
+    currentTab(newValue, oldValue) {
+      console.log(`currentTab value: ${oldValue} -> ${newValue}`)
+    }
+  }
+}
+
+</script>
+<style lang="less">
+.mask{
+  position: fixed;
+  z-index: 1000;
+  top:320rpx;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #6c6c6c;
+  opacity: 0.2;
+}
+.shai_classifi{
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #fff;
+  padding-bottom: 20rpx;
+  .classifi_item{
+    width: 220rpx;
+    height: 44rpx;
+    border: 1rpx solid #a1a1a1;
+    font-size: 26rpx;
+    color: #666;
+    border-radius: 90rpx;
+    text-align: center;
+    line-height: 44rpx;
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 20rpx;
+  }
+  .activeSort{
+    border:none;
+    background-color: #ff9600;
+    color: #fff;
+  }
+}
+.swiper-tab {
+  width: 678rpx;
+  border-bottom: 1rpx solid #eee;
+  line-height: 65rpx;
+  height: 70rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: row nowrap;
+  align-items: center;
+  background: #fff;
+  overflow: auto;
+}
+.tabViewimg{
+  display: flex;
+  justify-content: space-between;
+}
+.right_shai{
+  display: flex;
+  width: 72rpx;
+  height: 70rpx;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-left: 2rpx solid #a1a1a1;
+  .shaixuan{
+    display: inline-flex;
+    width: 38rpx;
+    height: 38rpx;
+  }
+}
+
+.swiper-tab-list {
+  flex: 1 0 140rpx ;
+  font-size: 30rpx;
+  text-align: center;
+  color: #777777;
+  padding: 0 20rpx;
+  position: relative;
+}
+
+.active {
+  color: #eb6623;
+  border-bottom: 5rpx solid #eb6623;
+}
+
+// .swiper-box {
+//   display: block;
+//   height: 100%;
+//   width: 100%;
+//   overflow: hidden;
+// }
+
+// .swiper-item-box {
+//   overflow-y: scroll;
+//   overflow-x: hidden;
+// }
+
+</style>

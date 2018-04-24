@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.kucunp {
+  background-color: #fff;
+  padding-left: 40rpx;
+  padding-right: 42rpx;
+  padding-bottom: 10rpx; }
+  .kucunp .text {
+    padding-top: 33rpx;
+    font-size: 28rpx;
+    color: #919191; }
+  .kucunp .diqu {
+    height: 111rpx;
+    margin-bottom: 18rpx;
+    border-bottom: 1rpx solid #E1E1E1; }
+    .kucunp .diqu .left_d {
+      display: inline-block;
+      padding-top: 30rpx;
+      font-size: 30rpx;
+      color: #4d4d4d; }
+    .kucunp .diqu .right_d {
+      float: right;
+      padding-top: 30rpx; }
+      .kucunp .diqu .right_d .shensq {
+        display: inline-block;
+        padding-right: 26rpx;
+        font-size: 28rpx;
+        color: #555555; }
+      .kucunp .diqu .right_d .next {
+        display: inline-block;
+        width: 25.4rpx;
+        height: 25.4rpx; }
+
+.btn_next {
+  margin: 0 auto;
+  margin-top: 75rpx;
+  width: 670rpx;
+  height: 100rpx;
+  background-color: #FFCE10;
+  line-height: 100rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  font-size: 36rpx;
+  color: #555; }

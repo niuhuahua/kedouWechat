@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.bottom {
+  position: fixed;
+  bottom: 50rpx;
+  left: 40rpx; }
+  .bottom .dotpo {
+    position: relative; }
+    .bottom .dotpo .dot {
+      width: 52rpx;
+      height: 52rpx;
+      border-radius: 50rpx;
+      background-color: #ffce10;
+      font-size: 28rpx;
+      color: #555;
+      text-align: center;
+      line-height: 52rpx;
+      position: absolute;
+      top: -10rpx;
+      left: 100rpx; }
+  .bottom .dan_icon {
+    width: 160rpx;
+    height: 160rpx; }

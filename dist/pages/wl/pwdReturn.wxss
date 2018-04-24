@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.pwdReturn {
+  height: 1200rpx;
+  background-color: #fff; }
+  .pwdReturn .list_pwd {
+    margin: 0 auto;
+    width: 666.9rpx;
+    height: 131rpx;
+    line-height: 131rpx;
+    border-bottom: 1rpx solid #c2c2c2; }
+    .pwdReturn .list_pwd .input_pwd {
+      display: block;
+      float: left;
+      font-size: 28rpx;
+      color: #919191;
+      padding-left: 20rpx;
+      padding-top: 20rpx;
+      margin-right: 20rpx;
+      width: 360rpx;
+      height: 100rpx; }
+    .pwdReturn .list_pwd .clen_icon {
+      display: block;
+      float: right;
+      margin-top: 60rpx;
+      width: 36rpx;
+      height: 36rpx; }
+    .pwdReturn .list_pwd .return_msg {
+      width: 264rpx;
+      height: 75rpx;
+      border: 1rpx dotted #FFCE10;
+      padding: 16rpx 28rpx;
+      font-size: 28rpx;
+      color: #FFAF10; }
+  .pwdReturn .btn_next {
+    margin: 0 auto;
+    margin-top: 75rpx;
+    width: 670rpx;
+    height: 100rpx;
+    background-color: #FFCE10;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    font-size: 36rpx;
+    color: #555; }

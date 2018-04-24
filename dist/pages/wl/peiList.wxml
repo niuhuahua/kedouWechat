@@ -1,0 +1,70 @@
+
+<view>
+  <view class="topPei">
+    <text class="pei_tye">配送类别</text>
+    <text class="pei_main">全部</text>
+    <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" class="iconOpen"/>
+  </view>
+   <view class="topPei">
+    <text class="pei_tye">出库仓</text>
+    <text class="pei_main">{{from_name}}</text>
+    <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" class="iconOpen" bindtap="getWare" data-wpygetware-a="1"/>
+    <view class="showPosi" wx-if="{{onShow}}">
+       <text class="posi_item" bindtap="oneClick" data-wpyoneclick-a="0">全部</text>
+       <text class="posi_item"  wx:for="{{oneData}}" wx:key="index" bindtap="oneClick" data-wpyoneclick-a="{{item}}">{{item.ware_name}}</text>
+    </view>
+  </view>
+   <view class="topPei" style="margin-bottom:30rpx;">
+    <text class="pei_tye">入库仓</text>
+    <text class="pei_main">{{to_name}}</text>
+    <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" class="iconOpen" bindtap="getWare" data-wpygetware-a="2"/>
+    <view class="showPosi" wx-if="{{twoShow}}">
+       <text class="posi_item" bindtap="twoClick" data-wpytwoclick-a="0">全部</text>
+       <text class="posi_item"  wx:for="{{twoData}}" wx:key="index" bindtap="twoClick" data-wpytwoclick-a="{{item}}">{{item.ware_name}}</text>
+    </view>
+  </view>
+ <scroll-view scroll-y style="height:880rpx;">
+    <block wx:for="{{mainData}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+   
+  <view class="plist">
+     <view class="plist-top">
+         <text style="display: block;margin-top:20rpx;">{{item.from_ware_name}}仓库 <text style="padding-left:20rpx;padding-right:20rpx">至</text>   {{item.to_ware_name}}仓库 </text>
+          <text class="top_bottom">配送单号：{{item.allocation_order_sn}}</text>
+          <text class="top_right">{{item.add_time}}</text>
+      </view>
+       <view class="plist-bottom" wx-if="{{!showArry[index]}}">
+             <image src="{{item.goodsItems[0].image_thumb}}" lazy-load="true" class="pro_img"/>
+             <view class="pro_introd">
+                 <view class="introd_top">{{item.goodsItems[0].goods_name}}</view>
+                 <view class="intr_spice"> {{item.goodsItems[0].g_value}} {{item.goodsItems[0].gg_value}}</view>
+                 <view class="price">￥{{item.goodsItems[0].price_sell}} * {{item.goodsItems[0].goods_count}}  </view>
+                 <view class="all_price">￥{{item.goodsItems[0].price_sell * item.goodsItems[0].goods_count}}</view>
+             </view>
+      </view>
+      <block wx-if="{{showArry[index]}}">
+          <view class="plist-bottom"  wx:for="{{item.goodsItems}}" wx:key="index">
+             <image src="{{item.image_thumb}}" lazy-load="true" class="pro_img"/>
+             <view class="pro_introd">
+                 <view class="introd_top">{{item.goods_name}}</view>
+                 <view class="intr_spice"> {{item.g_value}} {{item.gg_value}}</view>
+                 <view class="price">￥{{item.price_sell}} * {{item.goods_count}}  </view>
+                 <view class="all_price">￥{{item.price_sell * item.goods_count}}</view>
+             </view>
+      </view> 
+      </block>
+  </view>
+
+     <view class="lookAll"> 
+          <text class="all_name">查看全部商品</text><text class="all_num">  (单品{{item.goodscount1}},总数{{item.goodscount2}})</text>
+           <image wx-if="{{!showArry[index]}}" src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" bindtap="showThis" class="iconOpen" data-wpyshowthis-a="{{index}}"/>   
+           <image wx-if="{{showArry[index]}}" src="http://oi7fjcrqu.bkt.clouddn.com/btn_up@2x.png" bindtap="closeShow" class="iconOpen" data-wpycloseshow-a="{{index}}"/>       
+      </view>
+      <view class="all_prod_price">
+          <text class="priceName">商品总金额:</text><text class="price">￥{{item.total_fee}}</text>
+          <!-- <text class="typeProd" wx-if="{{item.status='1'}}"></text> -->
+      </view>
+  </block>
+ </scroll-view>
+  <view class="mask" wx-if="{{onShow}}" style="top:{{height}}rpx" bindtap="clearBoolean"/>
+  <view class="mask" wx-if="{{twoShow}}" style="top:{{height}}rpx" bindtap="clearBoolean"/>
+</view>

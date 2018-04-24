@@ -1,0 +1,113 @@
+$yellow: #FFAF10;
+$bc: #F4F4F4;
+$fc:#fff;
+$grey:#F3F3F3;
+$dotYellow:#FFCE10;
+$dotGrey:#555555;
+$orange:#ff7200;
+// 背景图片地址和大小
+@mixin bis($url) {
+	background-image: url($url);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+@mixin borderRadius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+//定位全屏
+@mixin allcover{
+	position:absolute;
+	top:0;
+	right:0;
+}
+
+//定位上下左右居中
+@mixin center {
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin ct {
+	position: absolute;
+	top: 50%;
+    transform: translateY(-50%);
+}
+
+//定位上下居中
+@mixin cl {
+	position: absolute;
+	left: 50%;
+    transform: translateX(-50%);
+}
+
+//宽高
+@mixin wh($width, $height){
+	width: $width;
+	height: $height;
+}
+// 距上距左
+@mixin pdTL($width, $height){
+	padding-top:  $width;
+	padding-left:  $height;
+}
+// 背景色
+@mixin bCol($color) {
+	background-color: $color;
+}
+// 颜色
+@mixin Col($color) {
+	color: $color;
+}
+//上下左右居中
+@mixin lnHgt($color) {
+	line-height:$color;
+	text-align: center;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
+	font: #{$size}/#{$line-height} $family;
+}
+
+//字体大小，颜色
+@mixin sc($size, $color){
+	font-size: $size;
+	color: $color;
+}
+
+//flex 布局和 子元素 对其方式
+@mixin fj($dis:inline-flex,$type: center,$con:center){
+	display: $dis;
+	justify-content: $type;
+	align-content: $con;
+}
+@mixin borbom($color){
+	border-bottom: 1.5rpx solid $color;
+}
+//图标
+@font-face {
+    font-family: 'iconfont';  /* project id 393411 */
+    src: url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot');
+    src: url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff') format('woff'),
+    url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont') format('svg');
+}
+@mixin iconfont($size){
+	font-family:"iconfont" !important;
+	font-size:$size;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	color: #A1A1A1;
+	-moz-osx-font-smoothing: grayscale;
+	padding: 0 12rpx;
+}

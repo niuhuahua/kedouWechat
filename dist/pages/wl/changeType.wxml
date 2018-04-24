@@ -1,0 +1,18 @@
+
+  <view class="changeTyppe">
+    <view class="wl_tpye" style="margin-top:20rpx;" bindtap="changP">
+      <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_pandian@2x.png" class="icon_type"/>
+      <text class="type_text">盘点功能</text>
+      <image wx-if="{{!pandian}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_select"/>
+      <image wx-if="{{pandian}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_select"/>
+    </view>
+     <view class="wl_tpye" bindtap="changW">
+      <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_wuliu@2x.png" class="icon_type"/>
+      <text class="type_text">物流功能</text>
+      <image wx-if="{{!wuliu}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="icon_select"/>
+      <image wx-if="{{wuliu}}" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="icon_select"/>
+    </view>
+    <!-- <view class="btn_next" style="margin-top:768rpx;">
+       <text>确认</text>
+    </view> -->
+    </view>

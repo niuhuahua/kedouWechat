@@ -1,0 +1,92 @@
+@import "./comReg.wxss";
+@font-face {
+  font-family: 'iconfont';
+  /* project id 393411 */
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot");
+  src: url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff") format("woff"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont") format("svg"); }
+
+.groupInput._d242ca4 {
+  margin-top: 110rpx; }
+  .groupInput input._d242ca4 {
+    border: 1rpx solid #A1A1A1;
+    border-radius: 2rpx; }
+  .groupInput .left._d242ca4 {
+    float: left; }
+  .groupInput .right._d242ca4 {
+    float: right; }
+  .groupInput .protocolView._d242ca4 {
+    margin-top: 30rpx;
+    padding-left: 45rpx;
+    display: flex;
+    align-items: center;
+    height: 35rpx; }
+    .groupInput .protocolView .icon-ok._d242ca4 {
+      width: 36rpx;
+      height: 36rpx; }
+    .groupInput .protocolView .proText._d242ca4 {
+      padding-left: 20rpx;
+      font-size: 28rpx;
+      color: #a0a0a0; }
+    .groupInput .protocolView .orangText._d242ca4 {
+      font-size: 28rpx;
+      color: #ff9600; }
+  .groupInput .nextBtn._d242ca4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff9600;
+    width: 640rpx;
+    height: 90rpx;
+    font-size: 36rpx;
+    color: #FEFEFE;
+    margin-top: 40rpx; }
+  .groupInput .toLoginView._d242ca4 {
+    display: flex;
+    margin-top: 60rpx;
+    justify-content: center; }
+    .groupInput .toLoginView .haveSpan._d242ca4 {
+      font-size: 32rpx;
+      color: #666666; }
+    .groupInput .toLoginView .loginSpan._d242ca4 {
+      font-size: 32rpx;
+      color: #ff9600; }
+  .groupInput .proDialog._d242ca4 {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 100; }
+    .groupInput .proDialog .dialog-main._d242ca4 {
+      position: fixed;
+      z-index: 5000;
+      width: 600rpx;
+      height: 700rpx;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      background-color: #FFFFFF;
+      border-radius: 3px;
+      overflow: hidden; }
+      .groupInput .proDialog .dialog-main .dialog-name._d242ca4 {
+        border: 1rpx solid rgba(216, 212, 212, 0.815); }
+        .groupInput .proDialog .dialog-main .dialog-name .Dname._d242ca4 {
+          display: inline-block;
+          padding-left: 230rpx;
+          padding-top: 14rpx;
+          padding-bottom: 6rpx; }
+        .groupInput .proDialog .dialog-main .dialog-name .iconfont._d242ca4 {
+          font-family: "iconfont" !important;
+          font-size: 45rpx;
+          font-style: normal;
+          -webkit-font-smoothing: antialiased;
+          -webkit-text-stroke-width: 0.2px;
+          color: #A1A1A1;
+          -moz-osx-font-smoothing: grayscale;
+          padding: 0 12rpx; }
+        .groupInput .proDialog .dialog-main .dialog-name .icon-close._d242ca4:before {
+          content: "\e626"; }

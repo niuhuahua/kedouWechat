@@ -1,0 +1,43 @@
+
+  <view>
+   <scroll-view scroll-y style="height:{{windowHeight}}">
+      <view class="plist"  wx:for="{{mainData}}" wx:key="index">
+      <view class="plist-top">
+         <text style="display: block;margin-top:20rpx;">{{item.inventory_fullname}}</text>
+         <text class="top_bottom"> {{item.end_time}} </text>
+         <text class="top_bottom_right">盘点结算单编号：{{item.inventory_sn}}</text>
+      </view>
+      <view class="plist-main">
+        商品缺失情况: <text wx-if="{{item.goods_lists.length==0}}">无</text><text wx-if="{{item.goods_lists.length!=0}}">有</text>
+      </view>
+       <block wx:for="{{item.goods_lists}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+        
+   <view class="plist-bottom">
+             <image src="{{item.image_thumb}}" binderror="$ProucItem$imgSrc" lazy-load="true" class="pro_img" data-com-index="{{index}}" data-wpyimgsrc-a="{{item.image_thumb}}"/>
+               <!-- <image wx-if="{{imgSrc!=''}}" src="{{imgSrc}}" binderror="imgSrc({{goods.image_thumb}})"  lazy-load="true" class="pro_img"></image> -->
+             <view class="pro_introd">
+                 <view class="introd_top">{{item.goods_name}}</view>
+                 <view class="intr_spice"> {{item.g_value}} {{item.gg_value}} <text wx-if="{{item.goods_ab=='1'}}">经销</text> <text wx-if="{{item.goods_ab=='2'}}">代销</text> <text wx-if="{{item.goods_ab=='3'}}">联销</text>   </view>
+                 <view class="price">￥{{item.price_sell}} * {{item.nums}}  </view>
+                 <!-- <view class="all_price">￥{{goods.price_sell*goods.nums }}</view> -->
+             </view>
+    </view>
+
+       </block>
+      <view class="plist_price">
+         <text style="color:#555555">实付金额：</text>
+         <text class="main_price">￥{{item.actual_pay}}</text>
+         <text class="list_type"> 
+           <text wx-if="{{item.status=='0'}}">未处理</text> 
+           <text wx-if="{{item.status=='2'}}">未处理</text> 
+           <text wx-if="{{item.status=='4'}}">未处理</text> 
+           <text wx-if="{{item.status=='3'}}">已处理</text>
+           <text wx-if="{{item.status=='5'}}">已处理</text>
+           <text wx-if="{{item.status=='6'}}">已处理</text>
+          </text>
+      </view>
+      <view class="ageaPan" wx-if="{{item.inventory_add=='1'}}">补充盘点</view>
+    </view>
+   </scroll-view>
+   <view class="noData" wx-if="noData">没有更多数据了</view>
+  </view>

@@ -1,0 +1,14 @@
+<style lang="scss">
+  @import '../../style/mixin.scss';
+</style>
+<template>
+  
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class NoData extends wepy.component {
+  
+}
+</script>
+

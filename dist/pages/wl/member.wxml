@@ -1,0 +1,20 @@
+
+  <view class="wlmember">
+     <view class="wlme_top">
+          <image src="{{user.avatar}}" class="userIcon"/>
+          <text class="wluser">{{user.user_nicename}}</text>
+     </view>
+     <view class="wl_me_list" bindtap="toChangePwd">
+         <text class="list_text">登录密码</text>
+         <text class="list_text_right">修改</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"/>
+     </view>
+      <view class="wl_me_list" bindtap="toChangePhone">
+         <text class="list_text">手机号码</text>
+         <text class="list_text_right">修改</text>
+         <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_right@2x.png" class="next"/>
+     </view>
+     <view class="loginOut" bindtap="loginOut">
+         <text>退出登录</text>
+     </view>
+  </view>

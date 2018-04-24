@@ -1,0 +1,46 @@
+<template>
+  <view class='searchView'>
+  <text class="iconfont icon-back"></text> 
+  <view class='viewSearch'>
+    <text class='iconfont icon-search pb'></text> 
+    <input type="text" class='iconfont inputSearch'placeholder="商品搜索" disabled/> 
+  </view>
+ </view>
+ <slot></slot>
+</template>
+<style lang="scss">
+//@import '../style/mixin.scss';
+/* page/dComp/top/searchComponent.wxss */
+    @font-face {
+    font-family: 'iconfont';  /* project id 393411 */
+    src: url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot');
+    src: url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.woff') format('woff'),
+    url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_393411_u6n51uw86ko6r.svg#iconfont') format('svg');
+    }
+    .icon-back:before { content: "\e625"; }/*返回图标*/
+    .icon-search:before { content: "\e699"; }/*搜索图标*/
+    .iconfont{
+        font-family:"iconfont" !important;
+        font-size:42rpx;font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        color: #A1A1A1;
+        -moz-osx-font-smoothing: grayscale;
+        padding: 0 12rpx;
+        }
+        .viewSearch{position: relative} 
+        .pb{position: absolute;z-index: 100;left: 30%;top:15%} 
+        .inputSearch{width: 642rpx;height: 60rpx; border: 1rpx solid #c3c3c3;background-color: #e5e5e5; text-align: center;font-size: 32rpx;}
+        .searchView{display: flex;  display: -webkit-flex; /* Safari */background-color: #f5f5f5;height: 90rpx;
+        flex-direction: row;align-items: center
+    }
+</style>
+<script>
+export default {
+  
+}
+</script>
+
+

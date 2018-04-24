@@ -1,0 +1,186 @@
+<style lang="scss">
+@import '../../style/mixin.scss';
+.wlLogin{
+    height: 1200rpx;
+    background-color: #fff;
+    // text-align: center;
+    .logoDiv{
+        text-align: center;
+        height: 473rpx;
+        line-height: 473rpx;
+        .logo{margin: 0 auto;
+            @include wh(290rpx,120rpx);
+        }
+    }
+    .content{
+        width: 580rpx;
+        margin: 0 auto;
+        .userInput{
+            width: 580rpx;
+            height: 60rpx;
+            padding-bottom: 20rpx;
+            border-bottom: 1rpx solid #C2C2C2;
+            .iconUser{  @include wh(40rpx,44rpx);padding-bottom: 16rpx;}
+            .iconEye{ @include wh(36rpx,22.4rpx);padding-bottom: 16rpx;padding-left: 20rpx; }
+            .inputUser{
+                display: inline-block;
+                margin-left: 48rpx;
+                @include wh(420rpx,68rpx);
+                @include sc(28rpx,#919191)
+                // border: 1rpx solid rebeccapurple;
+            }
+        }
+        .toLogin{
+            display: block;
+            margin-top: 84rpx;
+            @include wh(580rpx,100rpx);
+            text-align: center;
+            line-height: 100rpx;
+            background-color: $dotYellow;
+            @include sc(36rpx,#555);
+           
+        }
+         .login_boottom{
+            height: 60rpx;
+            line-height: 60rpx;
+            // background-color: chartreuse;
+            margin-top: 24rpx;
+         .from_select_icon{
+             display: block;
+             @include wh(40rpx,40rpx);
+             float: left;
+             margin-top: 8rpx;
+             margin-right: 17rpx;
+         }
+        .text_login{
+              @include sc(28rpx,#919191);
+        }
+        .forgetText{ display: block;float: right;}
+        }
+    }
+   
+}
+
+</style>
+<template>
+  <view class="wlLogin">
+     <view class="logoDiv">
+          <image class="logo" src="http://oi7fjcrqu.bkt.clouddn.com/logo.png"/>
+     </view>
+     <view class="content">
+          <view class="userInput">
+              <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_user@2x.png" class="iconUser"/>
+              <input type="text" @input="changePhone" class="inputUser" value="{{user_name}}" placeholder="请输入手机号码">
+          </view>
+          <view class="userInput" style="margin-top:81rpx;">
+              <image src="http://oi7fjcrqu.bkt.clouddn.com/icon_password@2x.png" class="iconUser"/>
+              <input wx-if="{{pwdClose}}"  @input="changePwd" type="password" class="inputUser" value="{{user_pass}}" placeholder="请输入密码">
+              <image  wx-if="{{pwdClose}}" @tap="pwdClose" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_close@2x.png" class="iconEye"/>
+              <input wx-if="{{!pwdClose}}"  @input="changePwd" type="text" class="inputUser" value="{{user_pass}}" placeholder="请输入密码">
+              <image  wx-if="{{!pwdClose}}" @tap="pwdClose" src="http://oi7fjcrqu.bkt.clouddn.com/btn_eye_open@2x.png" class="iconEye"/>
+          </view>
+          <view>
+              <button class="toLogin" @tap="toLogin">登录</button>
+              <view class="login_boottom">
+                  <image wx-if="{{remeMe}}" @tap="changeReMe" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_selected@2x.png" class="from_select_icon"></image>
+                  <image wx-if="{{!remeMe}}" @tap="changeReMe" src="http://oi7fjcrqu.bkt.clouddn.com/form_sel_default@2x.png" class="from_select_icon"></image>
+                 <text class="remberText text_login">记住我</text>
+                 <text class="forgetText text_login">忘记密码?</text>
+              </view>
+          </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from "wepy";
+import Tips from '../../util/Tips.js'
+import userService from '../../api/wl/user.js'
+export default class WlLogin extends wepy.page {
+     config = {
+      navigationBarTitleText: '登录'
+    };
+    data = {
+        user_name:'',
+        user_pass:'',
+        pwdClose:true,
+        remeMe:false
+    }
+    methods = {
+          changePhone(e){
+           this.user_name = e.detail.value;
+        },
+         changePwd(e){
+           this.user_pass = e.detail.value;
+         },
+         pwdClose(){
+             this.pwdClose = !this.pwdClose;
+         },
+         toLogin(){
+             let _t = this;
+             let userInfo = {
+                user_name:this.user_name,
+                user_pass :this.user_pass
+             }
+             userService.userLogin(userInfo).then(res=>{
+             if(res.Head.code=="S0000"){
+                 wx.setStorageSync('user', JSON.stringify(res.Body[0]));
+                _t.$navigate('changeType') 
+             }else{
+                 Tips.error('输入错误')
+                 return false;
+             }
+             }).catch(err=>{
+                console.log(err)
+             })
+         },
+         changeReMe(){
+             this.remeMe = !this.remeMe;
+             if(this.remeMe){
+               wx.setStorageSync('userName', this.user_name)
+             }else{
+                  wx.setStorageSync('userName', '')
+             }
+         }
+    }
+   async onLoad () {
+       try {
+          let user =  wx.getStorageSync('user');
+          let userName = wx.getStorageSync('userName');
+          if(userName){
+           this.user_name = userName;
+           this.remeMe = true;
+          }
+        //  if(user){
+        //    this.$navigate('pMember') ;
+        //  }else{
+           wx.login({
+            success: function(res) {
+             if (res.code) {
+                let url = "https://api.weixin.qq.com/sns/jscode2session?appid=wx6b62993f66b58177&secret=900a8d51b9c64b2f98f7302f0431281a&js_code="+res.code+"&grant_type=authorization_code";
+                // console.log(url)
+                wx.request({
+                    url: url,
+                    method: 'GET',
+                    success: function(res){
+                        wx.setStorageSync("session_key",res.data.session_key)
+                        wx.setStorageSync("openid",res.data.openid)
+                    //    let poenid =  wx.getStorageSync("openid");
+                    //    console.log(poenid)
+                    },
+                    fail: function() {
+                        console.log("fail")
+                    }
+                })
+              } else {
+                console.log('获取用户登录态失败！' + res.errMsg)
+             }
+      }
+    });
+    // }
+       } catch (error) {
+           console.log(error)
+       }
+   }
+}
+</script>
+

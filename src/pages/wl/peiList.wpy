@@ -1,0 +1,258 @@
+<style lang="scss">
+ @import '../../style/mixin.scss';
+  .lookAll{
+         height: 80rpx;
+         line-height: 80rpx;
+         border-bottom: 1rpx solid  #f3f3f3;
+         padding-left: 40rpx;
+         padding-right: 37rpx;
+         background: #fff;
+         .all_name{
+           @include sc(28rpx,#555 );
+         }
+         .all_num{
+           @include sc(28rpx,#FFCE10 );
+         }
+         .iconOpen{
+             float: right;
+             margin-top: 30rpx;
+             @include wh(36rpx,18rpx)
+         }
+     }
+     .all_prod_price{
+         height: 110rpx;
+         line-height: 110rpx;
+         padding-left: 40rpx;
+         background: #fff;
+          margin-bottom: 30rpx;
+         .priceName{
+               @include sc(28rpx,#555 );
+         }
+         .price{
+             padding-left: 10rpx;
+             @include sc(36rpx,#FFCE10 );
+         }
+     }
+     .topPei{
+        margin:  0 auto;
+        margin-top: 20rpx;
+        @include wh(606rpx,74rpx);
+        background:#fff;
+        border: 1rpx solid #E1E1E1;
+        line-height: 74rpx;
+        padding-left: 32rpx;
+        padding-right: 32rpx;
+        border-radius: 100rpx;
+        position: relative;
+        .pei_tye{
+            @include sc(24rpx,#919191 );
+        }
+        .pei_main{
+            padding-left: 180rpx;
+            @include sc(28rpx,#555 );
+        }
+        .iconOpen{
+             float: right;
+             margin-top: 30rpx;
+             @include wh(36rpx,18rpx)
+         }
+     }
+     .showPosi{
+       position: absolute;
+       margin: 0 auto;
+       left: -.2%;
+       top:80rpx;
+       @include wh(674rpx,304rpx);
+       background-color: #fff;
+       z-index: 1000;
+       text-align: center;
+       .posi_item{
+         width: 674rpx;
+         display: block;
+         border-bottom: 1rpx solid #f3f3f3;
+       }
+     }
+     .mask{
+       position: fixed;
+       z-index: 999;
+       background: #eeeded;
+       opacity: 0.5;
+       height: 100%;
+       left: 0;
+       right: 0;
+       bottom: 0;
+     }
+</style>
+<template>
+<view>
+  <view class="topPei">
+    <text class="pei_tye">配送类别</text>
+    <text class="pei_main">全部</text>
+    <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" class="iconOpen"></image>
+  </view>
+   <view class="topPei">
+    <text class="pei_tye">出库仓</text>
+    <text class="pei_main">{{from_name}}</text>
+    <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" class="iconOpen" @tap="getWare(1)"></image>
+    <view class="showPosi" wx-if="{{onShow}}">
+       <text class="posi_item" @tap="oneClick(0)">全部</text>
+       <text class="posi_item" wx:for="{{oneData}}" wx:key="index" @tap="oneClick({{item}})">{{item.ware_name}}</text>
+    </view>
+  </view>
+   <view class="topPei" style="margin-bottom:30rpx;">
+    <text class="pei_tye">入库仓</text>
+    <text class="pei_main">{{to_name}}</text>
+    <image src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" class="iconOpen" @tap="getWare(2)"></image>
+    <view class="showPosi"  wx-if="{{twoShow}}">
+       <text class="posi_item" @tap="twoClick(0)">全部</text>
+       <text class="posi_item" wx:for="{{twoData}}" wx:key="index" @tap="twoClick({{item}})">{{item.ware_name}}</text>
+    </view>
+  </view>
+ <scroll-view scroll-y   style="height:880rpx;">
+    <repeat for="{{mainData}}" key="index" index="index" item="item">
+   <PriProd :peiPro.sync="item" :showIS.sync="showArry" :indexPro.sync="index" ></PriProd>
+     <view class="lookAll"> 
+          <text class="all_name">查看全部商品</text><text class="all_num">  (单品{{item.goodscount1}},总数{{item.goodscount2}})</text>
+           <image wx-if="{{!showArry[index]}}" src="http://oi7fjcrqu.bkt.clouddn.com/btn_down@2x.png" @tap="showThis({{index}})" class="iconOpen"></image>   
+           <image wx-if="{{showArry[index]}}"src="http://oi7fjcrqu.bkt.clouddn.com/btn_up@2x.png" @tap="closeShow({{index}})" class="iconOpen"></image>       
+      </view>
+      <view class="all_prod_price">
+          <text class="priceName">商品总金额:</text><text class="price">￥{{item.total_fee}}</text>
+          <!-- <text class="typeProd" wx-if="{{item.status='1'}}"></text> -->
+      </view>
+  </repeat>
+ </scroll-view>
+  <view class="mask" wx-if="{{onShow}}" style="top:{{height}}rpx" @tap="clearBoolean"></view>
+  <view class="mask" wx-if="{{twoShow}}" style="top:{{height}}rpx"  @tap="clearBoolean"></view>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+import PriProd from '../../components/wl/peiPro'
+import panService from '../../api/wl/pan.js'
+import Tips from '../../util/Tips.js'
+export default class peiList extends wepy.page {
+  components={
+      PriProd:PriProd
+  }
+  data = {
+    height:200,
+    mainData:[],
+    oneData:[],
+    twoData:[],
+    from_name:'全部',
+    to_name:'全部',
+    from_ware_id:0,
+    to_ware_id:0,
+    page:1,
+    Page:'',
+    onShow:false,
+    twoShow:false,
+    showArry:[false,false,false,false,false,false,false,false,false,false,false]
+  }
+  methods = {
+    showThis(index){
+      this.showArry[index] = true;
+    },
+    closeShow(index){
+      this.showArry[index] = false;
+    },
+    getWare(num){
+      let param = {keytype:num}
+      let that = this;
+        panService.getWareList(param).then(res=>{
+          if(res.Head.code=="S0000"){
+            if(num==1){
+             that.oneData = res.Body;
+             that.height = 200;
+             that.onShow = true;
+             that.twoShow = false;
+             that.$apply()
+            }else{
+              that.twoData = res.Body;
+              that.height = 300;
+              that.twoShow = true;
+              that.onShow = false;
+               that.$apply()
+            }
+          }else{
+            Tips.error(res.Head.msg)
+          }
+        }).catch(err=>{
+          Tips.error(err.Head.msg)
+        })
+    },
+    oneClick(item){
+      if(item != 0){
+           this.from_ware_id = item.ware_id;
+           this.from_name = item.ware_name;
+      }else{
+          this.from_ware_id = 0;
+          this.from_name = "全部";
+      }
+       this.onShow = false;
+       this.$apply();
+       this.getAllOrerList(1, this.from_ware_id,this.to_ware_id);
+    },
+    twoClick(item){
+      if(item != 0){
+         this.to_ware_id = item.ware_id;
+         this.to_name = item.ware_name;
+      }else{
+         this.to_ware_id = 0;
+          this.to_name = "全部";
+      }
+       this.twoShow= false;
+       this.$apply();
+       this.getAllOrerList(1,this.from_ware_id,this.to_ware_id);
+    },
+    clearBoolean(){
+      this.onShow = false;
+      this.twoShow = false;
+      this.$apply();
+    }
+
+  }
+  getAllOrerList(page,from_ware_id,to_ware_id){
+    let param = { 
+      keytype:1,
+      from_ware_id:from_ware_id,
+      to_ware_id:to_ware_id,
+      page:page
+    }
+    let that = this;
+   panService.getAllocationOrderList(param).then(res=>{
+    if(res.Head.code=="S0000"){
+      wx.hideLoading();
+      that.mainData = res.Body;
+      that.Page = res.Page;
+      that.page = res.Page.pagenum;
+      console.log(res.Page)
+      that.showArry.length = res.Body.length;
+      that.$apply();
+      console.log(res)
+    }else{
+      Tips.error(res.Head.msg)
+    }
+   }).catch(err=>{
+     Tips.error(err.Head.msg)
+    })
+  }
+  onLoad(){
+    this.getAllOrerList(1,0,0);
+  }
+  /**
+  加载下一页
+   */
+  onReachBottom(){
+    console.log(this.Page)
+    let totalpage = this.Page.totalpage;
+    if(totalpage==this.page){
+     console.log("没有更多数据展示")
+    }
+  } 
+
+}
+</script>
+
+

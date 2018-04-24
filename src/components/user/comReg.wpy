@@ -1,0 +1,71 @@
+<style lang="scss" scoped>
+@import '../../style/mixin.scss';
+   input { 
+          border:1rpx solid #A1A1A1;
+          border-radius: 2rpx;
+          }
+    .left{float: left}
+    .right{float: right}
+    .phonView{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .phone{
+          @include wh(575rpx,90rpx);
+          padding-left: 80rpx;
+         }
+         .iconfont{
+             @include iconfont(42rpx);
+         }
+         .icon-phone:before { content: "\e624"; }/*返回图标*/
+         .posi{position: absolute;left:60rpx;}
+    }
+    .imgCodeView{
+         display: flex;
+         margin-top: 30rpx;
+         justify-content: center;
+        .imgCodeInput{
+          padding-left: 20rpx;
+          @include wh(400rpx,90rpx);
+          margin-right: 20rpx;
+         }
+        .imgCode{
+          @include wh(220rpx,90rpx);
+          @include bCol(#2dd);
+        }
+        .getCodeText{
+          display: inline-flex;
+          @include wh(220rpx,90rpx);
+          @include bCol(#e5e5e5);
+          align-items: center;
+          justify-content: center;
+          @include sc(28rpx,#666);
+        }
+    }
+</style>
+<template>
+  <view>
+    <view class="phonView">
+          <text class="iconfont icon-phone posi"></text>
+          <input class="phone" placeholder="请输入手机号"/>
+    </view>
+    <view class="imgCodeView">
+        <input class="imgCodeInput left" placeholder="图片验证码"/>
+        <image class="imgCode left"/>
+    </view>
+    <view class="imgCodeView">
+        <input class="imgCodeInput left" placeholder="请输入短信验证码"/>
+        <text class="getCodeText">获取验证码</text>
+    </view>
+    <slot></slot>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class comReg extends wepy.component {
+  
+}
+</script>
+
+
